@@ -1,9 +1,0 @@
-# Configuration for Dependabot
-
-version: 2
-updates:
-  - package-ecosystem: "github-actions"
-    versioning-strategy: "increase"
-    directory: "/"
-    schedule:
-      interval: "weekly"
