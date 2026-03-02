@@ -3,18 +3,12 @@
   <table align="center">
     <tr>
       <td width="400" height="400" align="center" valign="middle">
+    <img width="400" height="200" alt="working-pyxis0 2" src="https://github.com/user-attachments/assets/311fa269-7122-49ec-8a00-26f5d30f1efe" />
 
-<img width="100" height="100" alt="2902299066" src="https://github.com/user-attachments/assets/416892bd-efd8-46ad-ae43-255bd97b639a" />
 
-<div align="center">
-  <img width="250" height="250" alt="blackHole" src="https://github.com/user-attachments/assets/f04599d1-7379-4f92-9874-6acaa6fa1761" />
-</div>
-
-<div align="right">
-  <img width="100" height="100" alt="purpAsteroid" src="https://github.com/user-attachments/assets/44c269ee-6a1b-43f4-9fe8-6054c51a6184" />
-</div>
-</td>
-</tr>
+  
+  </td>
+  </tr>
 </table>
 
 
