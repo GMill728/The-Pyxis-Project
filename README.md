@@ -2,7 +2,7 @@
 
   <table align="center">
     <tr>
-      <td width="400" height="400" align="center" valign="middle">
+      <td width="400" height="200" align="center" valign="middle">
     <img width="400" height="200" alt="working-pyxis0 2" src="https://github.com/user-attachments/assets/311fa269-7122-49ec-8a00-26f5d30f1efe" />
 
 
