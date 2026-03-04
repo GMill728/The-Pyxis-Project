@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee1b21350739404d84ca40ce7127437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup_Handler
+  pickupType: 0
+  healthValue: 20
+  scoreValue: 100
 --- !u!212 &-3877944855708549138
 SpriteRenderer:
   serializedVersion: 2
