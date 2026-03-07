@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 1279027951}
   - component: {fileID: 1279027950}
   - component: {fileID: 1279027949}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,17 +1682,17 @@ MonoBehaviour:
   controller: {fileID: 1649862487}
   player: {fileID: 1649862485}
   acceleration: 100
-  groundFriction: 20
-  airFriction: 0
-  jumpForce: 5
-  gravity: -9.81
-  maxSpeed: 200
-  sensitivity: 2
   sprintAcceleration: 250
-  slideStartSpeed: 30
-  slideFriction: 20
+  groundFriction: 20
+  maxSpeed: 30
+  jumpForce: 6
+  gravity: -9.81
+  boostForce: 10
+  slideStartSpeed: 50
+  slideFriction: 10
   minSlideSpeed: 5
   slideCooldown: 0.8
+  sensitivity: 2
 --- !u!143 &1649862487
 CharacterController:
   m_ObjectHideFlags: 0
