@@ -1,0 +1,77 @@
+using System.Reflection;
+using UnityEngine;
+using System;
+using UnityEngine.UI;
+using TMPro;
+
+public class DebugHUD : MonoBehaviour
+{
+    public TMP_Text debugText;
+    public TMP_Text debugText2;
+    public GameObject playerObject;
+    public Transform player;
+    private float deltaTime;
+    Vector3 playerPOS;
+    private bool showHUD = false;
+
+    private void Start()
+    {
+        debugText.gameObject.SetActive(showHUD);
+        debugText2.gameObject.SetActive(showHUD);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            showHUD = !showHUD;
+            debugText.gameObject.SetActive(showHUD);
+            debugText2.gameObject.SetActive(showHUD);
+        }
+
+        if (!showHUD)
+            return;
+
+        //Calculate FPS
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+        float fps = 1f / deltaTime;
+
+
+        if (player != null)
+            playerPOS = player.position;
+        else
+            playerPOS = Vector3.zero;
+
+        debugText.text = GetVariablesText(playerObject) +
+                         $"FPS: {Mathf.CeilToInt(fps)}\n" +
+                         $"X/Y/Z: {playerPOS.x:F2}, {playerPOS.y:f2}, {playerPOS.z:F2}\n";
+
+        debugText2.text = GetVariablesText(this.gameObject);
+    }
+
+    string GetVariablesText(GameObject obj)
+    {
+            string result = $"--{obj.name}--\n";
+
+            MonoBehaviour[] scripts = obj.GetComponents<MonoBehaviour>();
+
+            foreach (var script in scripts)
+            {
+                if (script == this)
+                    continue;
+
+                result += $"[{script.GetType().Name}]\n";
+
+                FieldInfo[] fields = script.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var field in fields)
+                {
+                    object value = field.GetValue(script);
+                    result += $"{field.Name}: {value}\n";
+                }
+
+                //debugText.text += "\n";
+            }
+        return result;
+    }
+  
+}
