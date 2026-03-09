@@ -3,7 +3,7 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject menuButton;
-    public First_Person_Movement fpsController;
+    public Player_Movement fpsController;
 
     private bool paused = false;
 
