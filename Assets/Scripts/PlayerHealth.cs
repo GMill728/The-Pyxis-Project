@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
         //Delete Player Object/ Return to Main Menu or to Death Screen
     }
 
