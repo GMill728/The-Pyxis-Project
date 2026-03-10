@@ -4,6 +4,7 @@ public class PauseMenuController : MonoBehaviour
 {
     public GameObject menuButton;
     public Player_Movement fpsController;
+    public SceneLoader sceneLoader;
 
     private bool paused = false;
 
@@ -36,6 +37,7 @@ public class PauseMenuController : MonoBehaviour
 
         public void ReturnToMainMenu()
     {
+        sceneLoader.LoadSceneByName("MainMenu");
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
