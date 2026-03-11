@@ -43,7 +43,7 @@ public class Pickup_Handler : MonoBehaviour
                 break;
 
             case PickupType.Score:
-                rend.material.color = Color.blue;
+                rend.material.color = Color.cyan;
                 break;
 
             case PickupType.Key:
