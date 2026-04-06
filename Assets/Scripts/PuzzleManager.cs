@@ -26,6 +26,8 @@ public class PuzzleManager : MonoBehaviour
     void Start()
     {
         grid = new LightTile[width, height];
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         SpawnTiles();
         CreateLightBar();

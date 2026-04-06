@@ -9,7 +9,7 @@ public class TerminalDemo : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Load Scene!");
-            sceneLoader.LoadSceneByName("Demo");
+            sceneLoader.LoadSceneByName("Puzzle");
             Debug.Log("Player entered the zone!");
         }
     }
