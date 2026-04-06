@@ -4462,6 +4462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuController
   menuButton: {fileID: 924782357}
+  crosshair: {fileID: 173100832}
   fpsController: {fileID: 330439913}
   sceneLoader: {fileID: 805225608}
 --- !u!114 &805225608
@@ -5741,6 +5742,42 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -5771,6 +5808,18 @@ PrefabInstance:
     - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065339122451438109, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065339122451438109, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.050980397
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065339122451438109, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9198749922575595850, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
       propertyPath: m_Pivot.x

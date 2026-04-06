@@ -3,6 +3,7 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject menuButton;
+    public GameObject crosshair;
     public Player_Movement fpsController;
     public SceneLoader sceneLoader;
 
@@ -27,7 +28,10 @@ public class PauseMenuController : MonoBehaviour
         paused = !paused;
 
         menuButton.SetActive(paused);
+        crosshair.SetActive(!paused);
         fpsController.enabled = !paused;
+
+
 
         Time.timeScale = paused ? 0f : 1f;
 
