@@ -5,6 +5,7 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] private PlayerHealth PlayerHealthScript;
     [SerializeField] private ScoreManager ScoreManagerScript;
+
     [field: SerializeField] public float timeLeft { get; private set; } = 60f;
     private bool timerActive = true;
     public Action<float> OnTimerChanged;
@@ -15,6 +16,7 @@ public class TimeManager : MonoBehaviour
 
         if(playerObj != null)
         PlayerHealthScript = playerObj.GetComponent<PlayerHealth>();
+
 
     }
 

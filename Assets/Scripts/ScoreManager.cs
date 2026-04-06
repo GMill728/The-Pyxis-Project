@@ -14,11 +14,14 @@ public class ScoreManager : MonoBehaviour
         currentScore = startingScore;
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        HitscanDetector.OnEnemyHit += AddEnemyScore;
+    }
+
+    private void OnDisable()
+    {
+        HitscanDetector.OnEnemyHit -= AddEnemyScore;
     }
 
     //When stage is completed, remaining time is mulitplied and added into score.
