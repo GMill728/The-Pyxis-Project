@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class HitscanDetector : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class HitscanDetector : MonoBehaviour
     [SerializeField]
     [Tooltip("The camera of the player.")]
     private Camera _camera;
+
+    public static event Action<int> OnEnemyHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -41,6 +44,7 @@ public class HitscanDetector : MonoBehaviour
         {
             if (objectHit.collider.CompareTag("Enemy"))
             {
+                OnEnemyHit?.Invoke(100);
                 Destroy(objectHit.transform.gameObject);
             }
         }
