@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class PuzzleManager : MonoBehaviour
         SpawnTiles();
         CreateLightBar();
         UpdateLightState();
+    }
+
+    void Update()
+    {
+        if (isSolved){ChangeScene();}
     }
 
     void SpawnTiles()
@@ -145,5 +151,10 @@ public class PuzzleManager : MonoBehaviour
     void CheckForSolve()
     {
         isSolved = (lightCount <= solveNumber);
+    }
+
+    void ChangeScene()
+    {
+        SceneManager.LoadScene("Sprint4");
     }
 }
