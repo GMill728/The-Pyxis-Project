@@ -15,6 +15,7 @@ public class Pickup_Handler : MonoBehaviour
     public static event Action<int> OnScorePickup;
     public static event Action OnKeyPickup;
     public static event Action OnIntelPickup;
+    public Sprite IntelSprite;
 
     public PickupType pickupType;
     
@@ -24,11 +25,11 @@ public class Pickup_Handler : MonoBehaviour
     [Header("Score")]
     public int scoreValue = 100;
 
-    private Renderer rend;
+    private SpriteRenderer rend;
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        rend = GetComponent<SpriteRenderer>();
         SetColorByType();
     }
 
@@ -39,19 +40,19 @@ public class Pickup_Handler : MonoBehaviour
         switch (pickupType)
         {
             case PickupType.Health:
-                rend.material.color = Color.red;
+                rend.color = Color.red;
                 break;
 
             case PickupType.Score:
-                rend.material.color = Color.cyan;
+                rend.color = Color.cyan;
                 break;
 
             case PickupType.Key:
-                rend.material.color = Color.yellow;
+                rend.color = Color.yellow;
                 break;
 
             case PickupType.Intel:
-                rend.material.color = Color.green;
+                rend.sprite = IntelSprite;
                 break;
         }
     }

@@ -41,5 +41,11 @@ public class ScoreManager : MonoBehaviour
         OnScoreChanged?.Invoke(currentScore);
     }
 
+    public void AddItemScore(int itemValue)
+    {
+        currentScore += itemValue;
+        OnScoreChanged?.Invoke(currentScore);
+    }
+
 
 }
