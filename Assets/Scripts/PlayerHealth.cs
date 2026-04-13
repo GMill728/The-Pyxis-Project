@@ -7,23 +7,13 @@ public class PlayerHealth : MonoBehaviour
     [field: SerializeField] public int maxHealth { get; private set; } = 100; //an editable variable in Inspector, {Can only be read in other scripts, only this script can change it}
     public Action<int> OnHealthChanged;
 
-    private void Start()
-    {
 
-
-    }
     void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    void Update()
-    {
-       if(Input.GetKeyDown(KeyCode.Space))
-            {
-            TakeDamage(10);
-        }
-    }
+
     private void OnEnable()
     {
         Pickup_Handler.OnHealthPickup += Heal;

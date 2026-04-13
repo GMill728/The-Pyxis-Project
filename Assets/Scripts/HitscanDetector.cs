@@ -2,35 +2,35 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections;
 
 public class HitscanDetector : MonoBehaviour
 {
-
     private InputAction _attack;
 
     [SerializeField]
-    [Tooltip("The actual action map to manage")]
     private InputActionAsset _actionMap;
 
     [SerializeField]
-    [Tooltip("The name of the action map to manage")]
     private string _actionMapName = "Player";
 
     [SerializeField]
-    [Tooltip("The camera of the player.")]
     private Camera _camera;
 
+    [Header("Laser Visual")]
+    [SerializeField] private LineRenderer _laser;
+    [SerializeField] private float _laserDuration = 0.05f;
+
     public static event Action<int> OnEnemyHit;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Awake()
     {
         _attack = _actionMap.FindActionMap(_actionMapName).FindAction("Attack");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (_attack.IsPressed())
+        if (_attack.WasPressedThisFrame())
         {
             HandleHitscan();
         }
@@ -39,25 +39,46 @@ public class HitscanDetector : MonoBehaviour
     void HandleHitscan()
     {
         RaycastHit objectHit;
-        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out objectHit, 1000);
-        if (objectHit.collider != null)
+
+        Vector3 start = _camera.transform.position;
+        Vector3 direction = _camera.transform.forward;
+        Vector3 end = start + direction * 2000f;
+
+        if (Physics.Raycast(start, direction, out objectHit, 2000))
         {
-            if (objectHit.collider.CompareTag("Enemy"))
+            end = objectHit.point;
+
+            GameObject hitObject = objectHit.collider.gameObject;
+
+            // Weakpoint hit
+            if (hitObject.CompareTag("WeakPoint"))
+            {
+                Destroy(hitObject.transform.parent.gameObject);
+                OnEnemyHit?.Invoke(200); // stronger hit for weakpoint
+            }
+            // Normal enemy hit (optional fallback if body has Enemy tag)
+            else if (hitObject.CompareTag("Enemy"))
             {
                 OnEnemyHit?.Invoke(100);
-                Destroy(objectHit.transform.gameObject);
+                Destroy(hitObject);
             }
         }
-        
+
+        StartCoroutine(ShowLaser(start, end));
     }
 
-    private void OnEnable()
+    IEnumerator ShowLaser(Vector3 start, Vector3 end)
     {
-        _attack.Enable();
+        _laser.enabled = true;
+
+        _laser.SetPosition(0, start);
+        _laser.SetPosition(1, end);
+
+        yield return new WaitForSeconds(_laserDuration);
+
+        _laser.enabled = false;
     }
 
-    private void OnDisable()
-    {
-        _attack.Disable();
-    }
+    private void OnEnable() => _attack.Enable();
+    private void OnDisable() => _attack.Disable();
 }
