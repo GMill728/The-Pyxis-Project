@@ -8,14 +8,12 @@ public class HitscanDetector : MonoBehaviour
 {
     private InputAction _attack;
 
-    [SerializeField]
-    private InputActionAsset _actionMap;
+    [SerializeField] private InputActionAsset _actionMap;
+    [SerializeField] private string _actionMapName = "Player";
 
-    [SerializeField]
-    private string _actionMapName = "Player";
-
-    [SerializeField]
-    private Camera _camera;
+    [Header("References")]
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Transform _firePoint;
 
     [Header("Laser Visual")]
     [SerializeField] private LineRenderer _laser;
@@ -40,23 +38,35 @@ public class HitscanDetector : MonoBehaviour
     {
         RaycastHit objectHit;
 
-        Vector3 start = _camera.transform.position;
+        // Start from fire point (gun barrel)
+        Vector3 start = _firePoint.position;
+
+        // Default direction = camera forward
         Vector3 direction = _camera.transform.forward;
+
+        // Ray from camera to determine exact aim point
+        Ray camRay = new Ray(_camera.transform.position, _camera.transform.forward);
+
+        if (Physics.Raycast(camRay, out RaycastHit camHit, 2000f))
+        {
+            // Adjust direction so bullet goes from firepoint to where camera is aiming
+            direction = (camHit.point - start).normalized;
+        }
+
         Vector3 end = start + direction * 2000f;
 
-        if (Physics.Raycast(start, direction, out objectHit, 2000))
+        // Actual shot from firepoint
+        if (Physics.Raycast(start, direction, out objectHit, 2000f))
         {
             end = objectHit.point;
 
             GameObject hitObject = objectHit.collider.gameObject;
 
-            // Weakpoint hit
             if (hitObject.CompareTag("WeakPoint"))
             {
                 Destroy(hitObject.transform.parent.gameObject);
-                OnEnemyHit?.Invoke(200); // stronger hit for weakpoint
+                OnEnemyHit?.Invoke(200);
             }
-            // Normal enemy hit (optional fallback if body has Enemy tag)
             else if (hitObject.CompareTag("Enemy"))
             {
                 OnEnemyHit?.Invoke(100);
@@ -69,6 +79,9 @@ public class HitscanDetector : MonoBehaviour
 
     IEnumerator ShowLaser(Vector3 start, Vector3 end)
     {
+        _laser.startWidth = 0.05f;
+        _laser.endWidth = 0.05f;
+
         _laser.enabled = true;
 
         _laser.SetPosition(0, start);

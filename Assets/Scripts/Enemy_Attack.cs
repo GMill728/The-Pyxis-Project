@@ -35,20 +35,20 @@ public class Enemy_Attack : MonoBehaviour
         rend = GetComponent<Renderer>();
         line = GetComponent<LineRenderer>();
 
+        line.startWidth = 0.05f;
+        line.endWidth = 0.05f;
+
         line.enabled = false;
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || firePoint == null) return;
 
         fireTimer -= Time.deltaTime;
 
-        // Aim fire point at player
-        if (firePoint != null)
-        {
-            firePoint.LookAt(player);
-        }
+        // Rotate fire point toward player
+        firePoint.LookAt(player.position);
 
         if (rend.isVisible && InRange())
         {
@@ -71,10 +71,10 @@ public class Enemy_Attack : MonoBehaviour
     {
         Vector3 start = firePoint.position;
 
-        // Direction toward player
-        Vector3 direction = (player.position - start).normalized;
+        // Use firePoint forward (THIS is the key change)
+        Vector3 direction = firePoint.forward;
 
-        // Add spread based on distance
+        // Add spread (distance-based)
         float dist = Vector3.Distance(start, player.position);
         float spreadAmount = baseSpread + (dist * 0.002f);
 
@@ -88,7 +88,6 @@ public class Enemy_Attack : MonoBehaviour
         {
             end = hit.point;
 
-            // Handles player with multiple colliders
             if (hit.collider.transform.root.CompareTag("Player"))
             {
                 if (playerHealth != null)
@@ -98,7 +97,7 @@ public class Enemy_Attack : MonoBehaviour
             }
         }
 
-        // Draw laser
+        // Laser visual
         line.SetPosition(0, start);
         line.SetPosition(1, end);
 

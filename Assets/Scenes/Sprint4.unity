@@ -664,7 +664,7 @@ Transform:
   m_GameObject: {fileID: 76615810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.46, y: 0.183, z: 0.355}
+  m_LocalPosition: {x: 0.561, y: 0.189, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4635,6 +4635,7 @@ MonoBehaviour:
   _actionMap: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _actionMapName: Player
   _camera: {fileID: 511179006}
+  _firePoint: {fileID: 76615811}
   _laser: {fileID: 76615812}
   _laserDuration: 0.05
 --- !u!4 &805225610
