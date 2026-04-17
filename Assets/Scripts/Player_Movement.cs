@@ -10,6 +10,8 @@ public class Player_Movement : MonoBehaviour
 
     private float xRotation;
 
+    private bool isGrounded;
+
     [Header("Components")]
     [SerializeField] private Transform playerCamera;
     [SerializeField] private CharacterController controller;
@@ -56,68 +58,82 @@ public class Player_Movement : MonoBehaviour
         playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        HandleSlide();
+        isGrounded = controller.isGrounded;
+
         MovePlayer();
         MoveCamera();
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Only triggers on walls while in air
-        if (Mathf.Abs(hit.normal.y) < 0.2f && !controller.isGrounded) 
+        if (Mathf.Abs(hit.normal.y) < 0.2f && !isGrounded)
             HandleWallBounce(hit);
     }
 
     void MovePlayer()
     {
+        Vector3 inputDirection = GetInputDirection();
 
-        Vector3 inputDirection = Vector3.zero;
+        HandleGroundReset();
+        HandleAcceleration(inputDirection);
+        ApplyFriction();
 
-        if (playerMovementInput.magnitude > 0.01f)
-            inputDirection = transform.TransformDirection(playerMovementInput.normalized);
+        HandleJump();
+        HandleAirDash();
+        HandleAirStrafe();
+        HandleFastFall();
+        HandleSlide();
 
-        // Ground reset for special movements 
-        if (controller.isGrounded && verticalVelocity < 0)
+        ApplyMovement();
+    }
+
+    Vector3 GetInputDirection()
+    {
+        if (playerMovementInput.magnitude < 0.01f)
+            return Vector3.zero;
+
+        return transform.TransformDirection(playerMovementInput.normalized);
+    }
+
+    void HandleGroundReset()
+    {
+        if (isGrounded && verticalVelocity < 0)
         {
             verticalVelocity = -2f;
             canBoost = true;
             isFastFalling = false;
         }
+    }
 
-        // Ground acceleration
-        if (!isSliding && controller.isGrounded)
-        {
-            float accel = Input.GetKey(KeyCode.LeftShift) ? sprintAcceleration : acceleration;
-            horizontalVelocity += inputDirection * accel * Time.deltaTime;
-        }
+    void HandleAcceleration(Vector3 inputDirection)
+    {
+        if (isSliding || !isGrounded) return;
 
-        // Enforce max speed
+        float accel = Input.GetKey(KeyCode.LeftShift) ? sprintAcceleration : acceleration;
+        horizontalVelocity += inputDirection * accel * Time.deltaTime;
+
         horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed);
+    }
 
-        // Friction
-        float friction = controller.isGrounded ? groundFriction : 0.02f; // very low air friction
+    void ApplyFriction()
+    {
+        float friction = isGrounded ? groundFriction : 0.02f;
         horizontalVelocity -= horizontalVelocity * friction * Time.deltaTime;
-
-        // Handle movements
-        HandleJump();
-        HandleAirDash();
-        HandleAirStrafe();
-        HandleFastFall();
-        
     }
 
     void HandleJump()
     {
-        if ((controller.isGrounded || (canBoost)) && Input.GetKeyDown(KeyCode.Space))
-        {
-            if (controller.isGrounded)
-                canBoost = true;
-            else
-                canBoost = false;
+        if (!Input.GetKeyDown(KeyCode.Space)) return;
 
-            verticalVelocity = jumpForce;
-            horizontalVelocity *= 1.01f; // preserve momentum
-        }
+        if (isGrounded)
+            canBoost = true;
+        else if (!canBoost)
+            return;
+        else
+            canBoost = false;
+
+        verticalVelocity = jumpForce;
+        horizontalVelocity *= 1.01f;
     }
 
     void HandleSlide()
@@ -135,107 +151,91 @@ public class Player_Movement : MonoBehaviour
             slideDirection = transform.TransformDirection(playerMovementInput.normalized);
             currentSlideSpeed = Mathf.Max(slideStartSpeed, horizontalVelocity.magnitude);
 
-            // slide boost
             horizontalVelocity += slideDirection * 4f;
-
             player.localScale = new Vector3(1f, 0.5f, 1f);
         }
 
-        if (isSliding && controller.isGrounded)
+        if (!isSliding || !isGrounded) return;
+
+        currentSlideSpeed -= slideFriction * Time.deltaTime;
+
+        horizontalVelocity = Vector3.Lerp(
+            horizontalVelocity,
+            slideDirection * currentSlideSpeed,
+            10f * Time.deltaTime
+        );
+
+        if (currentSlideSpeed <= minSlideSpeed ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.LeftShift))
         {
-            currentSlideSpeed -= slideFriction * Time.deltaTime;
-
-            horizontalVelocity = Vector3.Lerp(
-                horizontalVelocity,
-                slideDirection * currentSlideSpeed,
-                10f * Time.deltaTime
-            );
-
-            if (currentSlideSpeed <= minSlideSpeed ||
-                Input.GetKeyDown(KeyCode.Space) ||
-                Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                isSliding = false;
-                player.localScale = Vector3.one;
-            }
+            isSliding = false;
+            player.localScale = Vector3.one;
         }
     }
 
     void HandleAirDash()
     {
-        if (!controller.isGrounded && canBoost && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Vector3 boostDir = Vector3.zero;
+        if (isGrounded || !canBoost || !Input.GetKeyDown(KeyCode.LeftShift))
+            return;
 
-            if (Input.GetKey(KeyCode.W)) boostDir += transform.forward;
-            if (Input.GetKey(KeyCode.S)) boostDir -= transform.forward;
-            if (Input.GetKey(KeyCode.A)) boostDir -= transform.right;
-            if (Input.GetKey(KeyCode.D)) boostDir += transform.right;
+        Vector3 boostDir =
+            transform.forward * playerMovementInput.z +
+            transform.right * playerMovementInput.x;
 
-            if (boostDir != Vector3.zero)
-            {
-                horizontalVelocity += boostDir.normalized * boostForce;
-                canBoost = false;
-            }
-        }
+        if (boostDir == Vector3.zero) return;
 
+        horizontalVelocity += boostDir.normalized * boostForce;
+        canBoost = false;
     }
 
     void HandleAirStrafe()
     {
-        if (!controller.isGrounded && !isSliding)
-        {
-            Vector3 horizontalDir = new Vector3(horizontalVelocity.x, 0f, horizontalVelocity.z);
-            float speed = horizontalDir.magnitude;
+        if (isGrounded || isSliding) return;
 
-            if (speed > 0.01f)
-            {
-                // Camera orientation
-                Vector3 camForward = playerCamera.forward;
-                camForward.y = 0f;
-                camForward.Normalize();
+        Vector3 horizontalDir = new Vector3(horizontalVelocity.x, 0f, horizontalVelocity.z);
+        float speed = horizontalDir.magnitude;
 
-                Vector3 camRight = playerCamera.right;
-                camRight.y = 0f;
-                camRight.Normalize();
+        if (speed < 0.01f) return;
 
-                // Input direction relative to camera
-                Vector3 inputDir = camForward * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
+        Vector3 camForward = playerCamera.forward;
+        Vector3 camRight = playerCamera.right;
 
-                if (inputDir != Vector3.zero)
-                {
-                    inputDir.Normalize();
-                    float redirectStrength = 0.02f; // small fraction to redirect current velocity
-                    horizontalVelocity = Vector3.Lerp(horizontalDir, inputDir * speed, redirectStrength);
-                }
-            }
-        }
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 inputDir = camForward * playerMovementInput.z + camRight * playerMovementInput.x;
+
+        if (inputDir == Vector3.zero) return;
+
+        inputDir.Normalize();
+        horizontalVelocity = Vector3.Lerp(horizontalDir, inputDir * speed, 0.02f);
     }
 
     void HandleFastFall()
     {
-        if (!controller.isGrounded && Input.GetKeyDown(KeyCode.LeftControl))
+        if (!isGrounded && Input.GetKeyDown(KeyCode.LeftControl))
             isFastFalling = true;
 
         if (isFastFalling)
-            verticalVelocity -= (boostForce * 4) * Time.deltaTime;
+            verticalVelocity -= (boostForce * 4f) * Time.deltaTime;
 
         float gravityMultiplier = verticalVelocity < 0 ? 1.6f : 1f;
         verticalVelocity += gravity * gravityMultiplier * Time.deltaTime;
+    }
 
+    void ApplyMovement()
+    {
         Vector3 move = horizontalVelocity + Vector3.up * verticalVelocity;
-
         controller.Move(move * Time.deltaTime);
     }
 
     void HandleWallBounce(ControllerColliderHit hit)
     {
-        // reflect movement angle
-        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal);
-
-        // kick off boost
-        horizontalVelocity *= 1.1f;
-
+        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 1.1f;
         canBoost = true;
     }
 
