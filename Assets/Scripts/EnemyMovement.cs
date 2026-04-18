@@ -4,22 +4,24 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform goal;
+    public GameObject[] goals;
     public float detectionRange = 10f;
+    public float stoppingDistance = 30f;
     private NavMeshAgent agent;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        goals = GameObject.FindGameObjectsWithTag("Player");
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, goal.position);
+        float distance = Vector3.Distance(transform.position, goals[0].transform.position);
 
-        if (distance < detectionRange)
+        if (distance < detectionRange && distance > stoppingDistance)
         {
-            agent.SetDestination(goal.position);
+            agent.SetDestination(goals[0].transform.position);
         }
         else
         {

@@ -164,5 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161ae017e3280fe428f4884aad45ebb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  goal: {fileID: 8791973766288305538, guid: 9b05ac0743cc5234ca33229ae207d9d3, type: 3}
+  goals: []
   detectionRange: 30
+  stoppingDistance: 5
