@@ -1,6 +1,8 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -12,7 +14,8 @@ public class DungeonGenerator : MonoBehaviour
 
     public Vector2 size;
     public int startPos = 0;
-    public GameObject[] roomTypes;
+    public List<GameObject> roomTypes;
+    public List<GameObject> specialRooms;
     public GameObject startRoom;
     public GameObject endRoom;
     public Vector2 offset;
@@ -23,6 +26,7 @@ public class DungeonGenerator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        roomTypes.AddRange(specialRooms);
         MazeGenerator();
     }
 
@@ -48,14 +52,26 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     else
                     {
-                        newRoom = Instantiate(roomTypes[Random.Range(0, roomTypes.Length)], new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
+                        newRoom = Instantiate(roomTypes[Mathf.FloorToInt(UnityEngine.Random.Range(0, roomTypes.Count))], new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     }   
+                    for (int k = 0; k < roomTypes.Count; k++)
+                    {
+                        if (newRoom.tag != "Untagged" && newRoom.tag == roomTypes[k].tag)
+                        {
+                            roomTypes.RemoveAt(k);
+                        }
+                    }
                     newRoom.UpdateRoom(board[Mathf.FloorToInt(i + j * size.x)].status);
 
                     newRoom.name += " " + i + "-" + j;
                 }
             }
         }
+        if (GameObject.FindGameObjectsWithTag("Airlock").Length == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        Debug.Log("Reloaded");
     }
 
     void MazeGenerator()
@@ -105,7 +121,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 path.Push(currentCell);
 
-                int newCell = neighbors[Random.Range(0, neighbors.Count)];
+                int newCell = neighbors[UnityEngine.Random.Range(0, neighbors.Count)];
 
                 if (newCell > currentCell)
                 {

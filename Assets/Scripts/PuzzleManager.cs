@@ -157,6 +157,6 @@ public class PuzzleManager : MonoBehaviour
 
     void ChangeScene()
     {
-        SceneManager.LoadScene("Sprint4");
+        SceneManager.LoadScene("ProcGen Test");
     }
 }

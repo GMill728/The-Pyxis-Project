@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Demo.unity
     guid: d674e2ddb137b0f45af027dcdb0fae27
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sprint4.unity
     guid: 8b82c52c757e2054dacf5bfdc92d02ef
   - enabled: 1
