@@ -12,7 +12,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public Vector2 size;
     public int startPos = 0;
-    public GameObject room;
+    public GameObject[] roomTypes;
     public GameObject startRoom;
     public GameObject endRoom;
     public Vector2 offset;
@@ -48,7 +48,7 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     else
                     {
-                        newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
+                        newRoom = Instantiate(roomTypes[Random.Range(0, roomTypes.Length)], new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     }   
                     newRoom.UpdateRoom(board[Mathf.FloorToInt(i + j * size.x)].status);
 
