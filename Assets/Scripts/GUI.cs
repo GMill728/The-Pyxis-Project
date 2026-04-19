@@ -32,6 +32,7 @@ public class GUI : MonoBehaviour
 
     void Start()
     {
+        PlayerHealthScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         animPOS = TimeManagerScript.timeLeft;
         healthSlider.maxValue = PlayerHealthScript.maxHealth;
         healthSlider.value = PlayerHealthScript.currentHealth;
