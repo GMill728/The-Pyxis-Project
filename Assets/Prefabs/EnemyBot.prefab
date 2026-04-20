@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BillboardEnemyCombat
   range: 20
-  fireRate: 1
+  fireRate: 0.5
   laserDuration: 0.1
   damage: 5
   baseSpread: 0.03

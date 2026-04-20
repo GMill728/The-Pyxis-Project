@@ -129,9 +129,11 @@ public class Player_Movement : MonoBehaviour
             canBoost = true;
         else if (!canBoost)
             return;
-        else
+        else 
+        {
             canBoost = false;
-
+            AudioManager.Instance.PlaySFX(0);
+        }
         verticalVelocity = jumpForce;
         horizontalVelocity *= 1.01f;
     }
@@ -153,6 +155,8 @@ public class Player_Movement : MonoBehaviour
 
             horizontalVelocity += slideDirection * 4f;
             player.localScale = new Vector3(1f, 0.5f, 1f);
+
+            AudioManager.Instance.PlaySFX(0);
         }
 
         if (!isSliding || !isGrounded) return;
@@ -187,6 +191,9 @@ public class Player_Movement : MonoBehaviour
 
         horizontalVelocity += boostDir.normalized * boostForce;
         canBoost = false;
+
+        AudioManager.Instance.PlaySFX(0);
+
     }
 
     void HandleAirStrafe()

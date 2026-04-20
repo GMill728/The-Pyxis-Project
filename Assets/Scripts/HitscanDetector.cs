@@ -70,11 +70,13 @@ public class HitscanDetector : MonoBehaviour
             else if (hitObject.CompareTag("Enemy"))
             {
                 OnEnemyHit?.Invoke(100);
-                Destroy(hitObject);
+                AudioManager.Instance.PlaySFX(3);
             }
         }
 
         StartCoroutine(ShowLaser(start, end));
+
+        AudioManager.Instance.PlaySFX(1);
     }
 
     IEnumerator ShowLaser(Vector3 start, Vector3 end)
