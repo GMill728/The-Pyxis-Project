@@ -104,6 +104,8 @@ public class Enemy_Attack : MonoBehaviour
 
         line.enabled = true;
         laserTimer = laserDuration;
+
+        AudioManager.Instance.PlaySFX(1);
     }
 
     void HandleLaserVisual()

@@ -91,5 +91,7 @@ public class Pickup_Handler : MonoBehaviour
                 Debug.Log("Intel");
                 break;
         }
+
+        AudioManager.Instance.PlaySFX(2);
     }
 }
