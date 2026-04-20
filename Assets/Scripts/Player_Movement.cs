@@ -22,6 +22,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float sprintAcceleration = 60f;
     [SerializeField] private float groundFriction = 8f;
     [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float absoluteMaxSpeed = 100f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 6f;
@@ -229,13 +230,14 @@ public class Player_Movement : MonoBehaviour
 
     void ApplyMovement()
     {
+        horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, absoluteMaxSpeed);
         Vector3 move = horizontalVelocity + Vector3.up * verticalVelocity;
         controller.Move(move * Time.deltaTime);
     }
 
     void HandleWallBounce(ControllerColliderHit hit)
     {
-        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 1.1f;
+        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 0.9f;
         canBoost = true;
     }
 
