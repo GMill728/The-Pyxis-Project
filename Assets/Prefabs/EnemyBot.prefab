@@ -288,7 +288,7 @@ MonoBehaviour:
   range: 20
   fireRate: 1
   laserDuration: 0.1
-  damage: 5
+  damage: 2
   baseSpread: 0.03
   firePoint: {fileID: 2613896962607952635}
 --- !u!120 &5807408547316412339

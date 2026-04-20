@@ -1633,8 +1633,9 @@ MonoBehaviour:
   sprintAcceleration: 250
   groundFriction: 20
   maxSpeed: 30
-  jumpForce: 6
-  gravity: -9.81
+  absoluteMaxSpeed: 100
+  jumpForce: 7
+  gravity: -9
   boostForce: 10
   slideStartSpeed: 50
   slideFriction: 10
