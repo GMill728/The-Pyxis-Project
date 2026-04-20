@@ -237,7 +237,7 @@ public class Player_Movement : MonoBehaviour
 
     void HandleWallBounce(ControllerColliderHit hit)
     {
-        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 0.9f;
+        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 0.5f; //was originally .9f
         canBoost = true;
     }
 
