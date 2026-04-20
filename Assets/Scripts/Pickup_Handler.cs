@@ -16,7 +16,8 @@ public class Pickup_Handler : MonoBehaviour
     public static event Action OnKeyPickup;
     public static event Action OnIntelPickup;
     public Sprite IntelSprite;
-
+    public Sprite HealthSprite;
+    public Sprite KeySprite;
     public PickupType pickupType;
     
     [Header("Health")]
@@ -48,7 +49,7 @@ public class Pickup_Handler : MonoBehaviour
                 break;
 
             case PickupType.Key:
-                rend.color = Color.yellow;
+                rend.sprite = KeySprite;
                 break;
 
             case PickupType.Intel:
