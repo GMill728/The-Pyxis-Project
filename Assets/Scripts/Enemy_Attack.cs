@@ -22,7 +22,7 @@ public class Enemy_Attack : MonoBehaviour
     private float fireTimer;
     private float laserTimer;
 
-    void Start()
+    void Awake()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
@@ -54,6 +54,7 @@ public class Enemy_Attack : MonoBehaviour
         {
             if (fireTimer <= 0f)
             {
+                Debug.Log("Fired shot");
                 FireLaser();
                 fireTimer = fireRate;
             }
@@ -88,7 +89,7 @@ public class Enemy_Attack : MonoBehaviour
         {
             end = hit.point;
 
-            if (hit.collider.transform.root.CompareTag("Player"))
+            if (hit.transform.CompareTag("Player"))
             {
                 if (playerHealth != null)
                 {
