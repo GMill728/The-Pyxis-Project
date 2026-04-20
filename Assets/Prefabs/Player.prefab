@@ -1483,6 +1483,7 @@ GameObject:
   - component: {fileID: 460435118424304021}
   - component: {fileID: 2000852020099796040}
   - component: {fileID: 3029313869423827775}
+  - component: {fileID: 432737499190662007}
   - component: {fileID: 3780122049378284467}
   - component: {fileID: 2334339444838361163}
   - component: {fileID: 7759258585291872191}
@@ -1597,6 +1598,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &432737499190662007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067914967891060514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e38b771277fc1546887dc673586041b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionHandler
+  _actionMap: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _actionMapName: Player
+  _camera: {fileID: 5111577242791940519}
+  _sceneLoader: {fileID: 1591957127275929765}
 --- !u!114 &3780122049378284467
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Demo.unity
     guid: d674e2ddb137b0f45af027dcdb0fae27
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sprint4.unity
     guid: 8b82c52c757e2054dacf5bfdc92d02ef
+  - enabled: 1
+    path: Assets/Scenes/ProcGen Test.unity
+    guid: 319d9f394bdd32b418a145dd4f9a1995
   - enabled: 1
     path: Assets/Scenes/Puzzle.unity
     guid: 371a6c83eb172394eae7d839959c7c10

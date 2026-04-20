@@ -13,6 +13,7 @@ public class PauseMenuController : MonoBehaviour
     {
         fpsController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Movement>();
         fpsController.enabled = true;
+        Time.timeScale = 1f;
         menuButton.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
