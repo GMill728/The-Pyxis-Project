@@ -130,13 +130,14 @@ public class Player_Movement : MonoBehaviour
             canBoost = true;
         else if (!canBoost)
             return;
-        else 
+        else // double jump
         {
+            AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
             canBoost = false;
-            AudioManager.Instance.PlaySFX(0);
         }
         verticalVelocity = jumpForce;
         horizontalVelocity *= 1.01f;
+
     }
 
     void HandleSlide()
@@ -149,6 +150,7 @@ public class Player_Movement : MonoBehaviour
             !isSliding)
         {
             isSliding = true;
+
             slideCooldownTimer = slideCooldown;
 
             slideDirection = transform.TransformDirection(playerMovementInput.normalized);
@@ -156,8 +158,8 @@ public class Player_Movement : MonoBehaviour
 
             horizontalVelocity += slideDirection * 4f;
             player.localScale = new Vector3(1f, 0.5f, 1f);
-
-            AudioManager.Instance.PlaySFX(0);
+            
+            AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
         }
 
         if (!isSliding || !isGrounded) return;
@@ -193,7 +195,7 @@ public class Player_Movement : MonoBehaviour
         horizontalVelocity += boostDir.normalized * boostForce;
         canBoost = false;
 
-        AudioManager.Instance.PlaySFX(0);
+        AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
 
     }
 
