@@ -1641,6 +1641,7 @@ MonoBehaviour:
   slideFriction: 10
   minSlideSpeed: 5
   slideCooldown: 0.8
+  slideDuration: 0.75
   sensitivity: 2
 --- !u!143 &2334339444838361163
 CharacterController:

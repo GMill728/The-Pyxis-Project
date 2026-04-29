@@ -34,10 +34,11 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Slide")]
     [SerializeField] private float slideStartSpeed = 14f;
-    [SerializeField] private float slideFriction = 20f;
-    [SerializeField] private float minSlideSpeed = 2f;
+    [SerializeField] private float slideFriction = 5f;
+    [SerializeField] private float minSlideSpeed = 8f;
     [SerializeField] private float slideCooldown = 0.8f;
-
+    [SerializeField] private float slideDuration = 1.0f;
+    private float slideTimer;
     private bool isSliding;
     private float slideCooldownTimer;
     private float currentSlideSpeed;
@@ -108,12 +109,15 @@ public class Player_Movement : MonoBehaviour
 
     void HandleAcceleration(Vector3 inputDirection)
     {
-        if (isSliding || !isGrounded) return;
+        if (isSliding) return;
 
         float accel = Input.GetKey(KeyCode.LeftShift) ? sprintAcceleration : acceleration;
         horizontalVelocity += inputDirection * accel * Time.deltaTime;
 
-        horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed);
+        if(!isGrounded)
+            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed / 3);
+        else
+            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed);
     }
 
     void ApplyFriction()
@@ -150,6 +154,7 @@ public class Player_Movement : MonoBehaviour
             !isSliding)
         {
             isSliding = true;
+            slideTimer = slideDuration;
 
             slideCooldownTimer = slideCooldown;
 
@@ -164,6 +169,8 @@ public class Player_Movement : MonoBehaviour
 
         if (!isSliding || !isGrounded) return;
 
+        slideTimer -= Time.deltaTime;
+
         currentSlideSpeed -= slideFriction * Time.deltaTime;
 
         horizontalVelocity = Vector3.Lerp(
@@ -172,7 +179,9 @@ public class Player_Movement : MonoBehaviour
             10f * Time.deltaTime
         );
 
+        // slide cancel
         if (currentSlideSpeed <= minSlideSpeed ||
+            slideTimer <= 0f ||
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.LeftShift))
         {
