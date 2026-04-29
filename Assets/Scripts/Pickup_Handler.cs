@@ -92,6 +92,6 @@ public class Pickup_Handler : MonoBehaviour
                 break;
         }
 
-        AudioManager.Instance.PlaySFX(2);
+        AudioManager.Instance.PlaySFX(SFXType.Pickup);
     }
 }

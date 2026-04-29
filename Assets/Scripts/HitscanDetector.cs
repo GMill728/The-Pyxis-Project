@@ -41,6 +41,8 @@ public class HitscanDetector : MonoBehaviour
         // Start from fire point (gun barrel)
         Vector3 start = _firePoint.position;
 
+        AudioManager.Instance.PlaySFXAtPosition(SFXType.LaserShot, start);
+
         // Default direction = camera forward
         Vector3 direction = _camera.transform.forward;
 
@@ -66,17 +68,16 @@ public class HitscanDetector : MonoBehaviour
             {
                 Destroy(hitObject.transform.parent.gameObject);
                 OnEnemyHit?.Invoke(200);
+                AudioManager.Instance.PlaySFXAtPosition(SFXType.EnemyKill, objectHit.point);
             }
-            else if (hitObject.CompareTag("Enemy"))
+            else
             {
-                OnEnemyHit?.Invoke(100);
-                AudioManager.Instance.PlaySFX(3);
+                AudioManager.Instance.PlaySFXAtPosition(SFXType.BulletImpact, objectHit.point);
             }
         }
 
         StartCoroutine(ShowLaser(start, end));
 
-        AudioManager.Instance.PlaySFX(1);
     }
 
     IEnumerator ShowLaser(Vector3 start, Vector3 end)
