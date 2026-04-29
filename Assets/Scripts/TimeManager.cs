@@ -6,10 +6,14 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private PlayerHealth PlayerHealthScript;
     [SerializeField] private ScoreManager ScoreManagerScript;
 
-    [field: SerializeField] public float timeLeft { get; private set; } = 60f;
+    [field: SerializeField] public float timeLeft { get; private set; } = 90f;
     private bool timerActive = true;
     public Action<float> OnTimerChanged;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        timeLeft = 90f;
+    }
     void Start()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
@@ -36,7 +40,6 @@ public class TimeManager : MonoBehaviour
                 timeLeft = 0;
                 timerActive = false;
                 PlayerHealthScript.TakeDamage(100);
-                //or GameOver can be handled by an event in a GameManager Script
             }
         }
     }

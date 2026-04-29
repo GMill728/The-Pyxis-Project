@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManipulator : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CanvasManipulator : MonoBehaviour
 
     public GameObject firstCanvas;
     public GameObject secondCanvas;
+    public GameObject thirdCanvas;
 
     private Camera cam;
 
@@ -18,6 +20,7 @@ public class CanvasManipulator : MonoBehaviour
         cam = Camera.main;
         ogPOS = cam.transform.position;
         secondCanvas.SetActive(false);
+        thirdCanvas.SetActive(false);
     }
 
     public void ZoomIn()
@@ -51,5 +54,16 @@ public class CanvasManipulator : MonoBehaviour
             firstCanvas.SetActive(true);
         }
     }
-    
+
+    public void ThirdCanvasActive()
+    {
+        firstCanvas.SetActive(false);
+        thirdCanvas.SetActive(true);
+    }
+    public void ThirdCanvasDeactivate()
+    {
+        thirdCanvas.SetActive(false);
+        firstCanvas.SetActive(true);
+    }
+
 }

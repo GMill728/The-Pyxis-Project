@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PauseMenuController : MonoBehaviour
 {
-    public GameObject menuButton;
+    public static event Action<bool> onPausedChanged;
+    public GameObject pauseCanvas;
     public GameObject crosshair;
     public Player_Movement fpsController;
     public SceneLoader sceneLoader;
@@ -11,23 +13,53 @@ public class PauseMenuController : MonoBehaviour
 
     void Start()
     {
+        SetPauseState(false);
+        /*
         fpsController.enabled = true;
-        menuButton.SetActive(false);
+        Time.timeScale = 1f;
+        pauseCanvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        */
+    }
+    public void SetPauseState(bool value)
+    {
+
+        paused = value;
+
+        pauseCanvas.SetActive(paused);
+        crosshair.SetActive(!paused);
+        fpsController.SetPause(paused);
+
+        Time.timeScale = paused ? 0f : 1f;
+
+
+        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = paused;
+        if (!paused)
+        {
+            Input.ResetInputAxes();
+        }
+
+        onPausedChanged?.Invoke(paused);
+
+
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            TogglePause();
+             TogglePause();
     }
 
+   
     public void TogglePause()
     {
+        SetPauseState(!paused);
+        /*
         paused = !paused;
 
-        menuButton.SetActive(paused);
+        pauseCanvas.SetActive(paused);
         crosshair.SetActive(!paused);
         fpsController.enabled = !paused;
 
@@ -37,6 +69,9 @@ public class PauseMenuController : MonoBehaviour
 
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = paused;
+
+        onPausedChanged?.Invoke(paused);
+        */
     }
 
         public void ReturnToMainMenu()
@@ -46,4 +81,5 @@ public class PauseMenuController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
 }

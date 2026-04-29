@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         HitscanDetector.OnEnemyHit -= AddEnemyScore;
-        Pickup_Handler.OnScorePickup += AddItemScore;
+        Pickup_Handler.OnScorePickup -= AddItemScore;
     }
 
     //When stage is completed, remaining time is mulitplied and added into score.

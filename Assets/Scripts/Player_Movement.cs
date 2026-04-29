@@ -11,6 +11,7 @@ public class Player_Movement : MonoBehaviour
     private float xRotation;
 
     private bool isGrounded;
+    private bool isPaused;
 
     [Header("Components")]
     [SerializeField] private Transform playerCamera;
@@ -51,12 +52,30 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
+
+    }
+    public void SetPause(bool paused)
+    {
+        isPaused = paused;
+
+        if(paused)
+        {
+            playerMovementInput = Vector3.zero;
+            playerMouseInput = Vector2.zero;
+        }
     }
 
     void Update()
     {
+        if(isPaused)
+        {
+            return;
+        }
+
+        sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
         playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        playerMouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         isGrounded = controller.isGrounded;
 
@@ -244,7 +263,12 @@ public class Player_Movement : MonoBehaviour
         xRotation -= playerMouseInput.y * sensitivity;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.Rotate(Vector3.up * playerMouseInput.x * sensitivity);
+        transform.Rotate(Vector3.up * playerMouseInput.x * sensitivity * 10f);
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    public void SetSensitivity(float value)
+    {
+        sensitivity = Mathf.Clamp(value, 0.2f, 15f);
     }
 }

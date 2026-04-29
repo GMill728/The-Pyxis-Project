@@ -27,35 +27,34 @@ public class GUI : MonoBehaviour
     public TMP_Text pickUpText;
     bool objPickedUp = false;
 
-
+    private void Awake()
+    {
+        PlayerHealthScript = FindFirstObjectByType<PlayerHealth>();
+        ScoreManagerScript = FindFirstObjectByType<ScoreManager>();
+        TimeManagerScript = FindFirstObjectByType<TimeManager>();
+    }
 
 
     void Start()
     {
-        animPOS = TimeManagerScript.timeLeft;
-        healthSlider.maxValue = PlayerHealthScript.maxHealth;
-        healthSlider.value = PlayerHealthScript.currentHealth;
-        fill.color = healthGrad.Evaluate(1f);
-
-        if (PlayerHealthScript == null)
+        if(PlayerHealthScript != null)
         {
-            GameObject playerObj = GameObject.FindWithTag("Player");
-            if (playerObj != null)
-            {
-                PlayerHealthScript = playerObj.GetComponent<PlayerHealth>();
-            }
+            healthSlider.maxValue = PlayerHealthScript.maxHealth;
+            healthSlider.value = PlayerHealthScript.currentHealth;
+            fill.color = healthGrad.Evaluate(1f);
+            UpdateHealthText(PlayerHealthScript.currentHealth);
+        }
+        //animPOS = TimeManagerScript.timeLeft;
+
+        if (ScoreManagerScript != null)
+        {
+            UpdateScoreText(ScoreManagerScript.currentScore);
         }
 
-        PlayerHealthScript.OnHealthChanged += UpdateHealthText;
-        ScoreManagerScript.OnScoreChanged += UpdateScoreText;
-        TimeManagerScript.OnTimerChanged += UpdateTimerText;
-
-
-
-        UpdateHealthText(PlayerHealthScript.currentHealth);
-        UpdateScoreText(ScoreManagerScript.currentScore);
-        UpdatePickUpMsg();
-
+        if (TimeManagerScript != null)
+        {
+            UpdateTimerText(TimeManagerScript.timeLeft);
+        }
     }
 
     private void Update()
@@ -63,14 +62,57 @@ public class GUI : MonoBehaviour
         currentAnimPOS = Mathf.MoveTowards(currentAnimPOS, animPOS, Time.deltaTime * smoothSpeed);
         GUIAnimator.SetFloat(GUITimerID, Mathf.Clamp01(currentAnimPOS));
     }
+    private void Subscribe()
+    {
+        
+
+        if (PlayerHealthScript != null)
+        {
+            PlayerHealthScript.OnHealthChanged += UpdateHealthText;
+            UpdateHealthText(PlayerHealthScript.currentHealth);
+        }
+
+        if (ScoreManagerScript != null)
+        {
+            ScoreManagerScript.OnScoreChanged += UpdateScoreText;
+            UpdateScoreText(ScoreManagerScript.currentScore);
+        }
+
+        if (TimeManagerScript != null)
+        {
+            TimeManagerScript.OnTimerChanged += UpdateTimerText;
+            UpdateTimerText(TimeManagerScript.timeLeft);
+        }
+        
+        Pickup_Handler.OnIntelPickup += IntelRetrieved;
+        Pickup_Handler.OnKeyPickup += UpdateKeyMsg;
+    }
+
     private void OnEnable()
     {
-        Pickup_Handler.OnIntelPickup += IntelRetrieved;
+        Subscribe();
     }
 
     private void OnDisable()
     {
+        if (PlayerHealthScript != null)
+        {
+            PlayerHealthScript.OnHealthChanged -= UpdateHealthText;
+        }
+
+        if (ScoreManagerScript != null)
+        {
+            ScoreManagerScript.OnScoreChanged -= UpdateScoreText;
+        }
+
+        if (TimeManagerScript != null)
+        {
+            TimeManagerScript.OnTimerChanged -= UpdateTimerText;
+        }
+
         Pickup_Handler.OnIntelPickup -= IntelRetrieved;
+        Pickup_Handler.OnKeyPickup -= UpdateKeyMsg;
+
     }
 
 
@@ -78,7 +120,7 @@ public class GUI : MonoBehaviour
     {
         healthSlider.value = healthValue;
         fill.color = healthGrad.Evaluate(healthSlider.normalizedValue);
-        healthText.text = $"Health: {healthValue}";
+        //healthText.text = $"Health: {healthValue}";
     }
 
     private void UpdateScoreText(int scoreValue)
@@ -123,6 +165,7 @@ public class GUI : MonoBehaviour
         
         UpdatePickUpMsg();
     }
+
     private void UpdatePickUpMsg()
     {
 
@@ -134,19 +177,19 @@ public class GUI : MonoBehaviour
             ObjAnimator.SetBool("pickedUp", true);
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hasKey"></param>
+    private void UpdateKeyMsg(bool hasKey)
     {
-        if ((PlayerHealthScript != null))
-        {
-           PlayerHealthScript.OnHealthChanged -= UpdateHealthText;
-        }
-        if ((ScoreManagerScript != null))
-        {
-            ScoreManagerScript.OnScoreChanged -= UpdateScoreText;
-        }
-        if ((TimeManagerScript != null))
-        {
-            TimeManagerScript.OnTimerChanged -= UpdateTimerText;
-        }
+        /*
+       if (hasKey == false)
+          //animator and/or disable the image/gameobject holding it
+       else
+           //animator and/or enable the image/gameobject holding it
+        */
     }
+
+   
 }

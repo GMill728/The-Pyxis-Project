@@ -13,7 +13,7 @@ public class Pickup_Handler : MonoBehaviour
 
     public static event Action<int> OnHealthPickup;
     public static event Action<int> OnScorePickup;
-    public static event Action OnKeyPickup;
+    public static event Action <bool> OnKeyPickup;
     public static event Action OnIntelPickup;
     public Sprite IntelSprite;
 
@@ -81,7 +81,7 @@ public class Pickup_Handler : MonoBehaviour
                 break;
 
             case PickupType.Key:
-                OnKeyPickup?.Invoke();
+                OnKeyPickup?.Invoke(true);
                 Debug.Log("Key");
                 break;
 
