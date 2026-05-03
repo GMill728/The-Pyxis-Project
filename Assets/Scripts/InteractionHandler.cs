@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.SceneManagement;
 
 public class InteractionHandler : MonoBehaviour
 {
@@ -15,20 +16,28 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private Camera _camera;
 
     private bool hasIntel = false;
+    private bool hasKey = false;
 
     void OnEnable()
     {
         Pickup_Handler.OnIntelPickup += OnIntelPickup;
+        Pickup_Handler.OnKeyPickup += OnKeyPickup;
     }
 
     void OnDisable()
     {
         Pickup_Handler.OnIntelPickup -= OnIntelPickup;
+        Pickup_Handler.OnKeyPickup -= OnKeyPickup;
     }
 
     private void OnIntelPickup()
     {
         hasIntel = true;
+    }
+
+    private void OnKeyPickup()
+    {
+        hasKey = true;
     }
 
     void Start()
@@ -55,7 +64,14 @@ public class InteractionHandler : MonoBehaviour
                 if(!hasIntel) return;
                 onLevelComplete?.Invoke();
                 Debug.Log("Terminal Hit");
-                SceneLoader.LoadSceneByName("Puzzle");
+                if (hasKey)
+                {
+                    SceneLoader.LoadSceneByName(SceneManager.GetActiveScene().name);
+                }
+                else
+                {
+                    SceneLoader.LoadSceneByName("Puzzle");
+                }
             }
     }
 }
