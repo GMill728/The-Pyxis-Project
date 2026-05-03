@@ -9,6 +9,7 @@ TagManager:
   - Terminal
   - Airlock
   - Intel Room
+  - Minimap
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - PostProcessing
-  - 
+  - Minimap
   - 
   - 
   - 
@@ -54,3 +55,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Minimap
