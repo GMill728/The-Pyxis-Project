@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8928645029728932377}
   - component: {fileID: 7681527577143556891}
   - component: {fileID: -3877944855708549138}
-  - component: {fileID: 5692059293474979862}
   - component: {fileID: -6423043950694210722}
   m_Layer: 0
   m_Name: Pickup
@@ -47,9 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee1b21350739404d84ca40ce7127437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup_Handler
+  rotationSpeed: 75
   IntelSprite: {fileID: 21300000, guid: 518725dae88b07845b7f864aa573abe3, type: 3}
-  HealthSprite: {fileID: 0}
-  KeySprite: {fileID: 21300000, guid: 1a2e46880d79d424e8ec6a1aaf3b7783, type: 3}
+  HealthSprite: {fileID: 21300000, guid: e7b0fc1afb15d874993e4ae2b82c97af, type: 3}
+  KeySprite: {fileID: 21300000, guid: deda7e790f8cfbc48a038591715a68e3, type: 3}
+  ScoreSprite: {fileID: 21300000, guid: 9c4d60afb3e9d084d8712d8680474002, type: 3}
   pickupType: 0
   healthValue: 20
   scoreValue: 100
@@ -112,18 +113,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &5692059293474979862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5366699807305778899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e6cfbd28e605d24b8829f83149fc0ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Billboard_Behavior
 --- !u!135 &-6423043950694210722
 SphereCollider:
   m_ObjectHideFlags: 0
