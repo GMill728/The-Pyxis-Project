@@ -22,6 +22,7 @@ public class PuzzleManager : MonoBehaviour
     private int lightCount;
     public int solveNumber;
     public bool isSolved = false;
+    public bool isFinalStage = false;
 
     void Start()
     {
@@ -36,7 +37,15 @@ public class PuzzleManager : MonoBehaviour
 
     void Update()
     {
-        if (isSolved){ChangeScene();}
+        if(isSolved) {
+
+            if(isFinalStage)
+                SceneManager.LoadScene("MainMenu");
+            else
+                SceneManager.LoadScene("ProcGen Test");
+        
+            isSolved = false;
+        }
     }
 
     void SpawnTiles()
@@ -153,10 +162,5 @@ public class PuzzleManager : MonoBehaviour
     void CheckForSolve()
     {
         isSolved = (lightCount <= solveNumber);
-    }
-
-    void ChangeScene()
-    {
-        SceneManager.LoadScene("ProcGen Test");
     }
 }
