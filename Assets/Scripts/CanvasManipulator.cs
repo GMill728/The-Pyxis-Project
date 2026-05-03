@@ -9,7 +9,9 @@ public class CanvasManipulator : MonoBehaviour
     public float moveDuration = 1.5f;
 
     public GameObject firstCanvas;
+    public CanvasGroup firstCanvasGroup;
     public GameObject secondCanvas;
+    public GameObject thirdCanvas;
 
     private Camera cam;
 
@@ -18,6 +20,7 @@ public class CanvasManipulator : MonoBehaviour
         cam = Camera.main;
         ogPOS = cam.transform.position;
         secondCanvas.SetActive(false);
+        thirdCanvas.SetActive(false);
     }
 
     public void ZoomIn()
@@ -31,6 +34,21 @@ public class CanvasManipulator : MonoBehaviour
     {
         StartCoroutine(MoveCamera(cam.transform.position, ogPOS, true));
 
+    }
+
+    public void ThirdActive()
+    {
+        firstCanvasGroup.alpha = 1.0f;
+        firstCanvasGroup.interactable = false;
+        firstCanvasGroup.blocksRaycasts = false;
+        thirdCanvas.SetActive(true);
+    }
+
+    public void ThirdDeactivate()
+    {
+        thirdCanvas.SetActive(false);
+        firstCanvasGroup.interactable = true;
+        firstCanvasGroup.blocksRaycasts = true;
     }
 
     IEnumerator MoveCamera(Vector3 start, Vector3 end, bool returning = false)

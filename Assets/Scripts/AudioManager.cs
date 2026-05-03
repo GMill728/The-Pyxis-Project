@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public enum MusicType
 {
@@ -17,6 +18,7 @@ public enum SFXType
     BulletImpact,
     EnemyKill,
     ButtonClick,
+    ButtonClick2,
 
 }
 
@@ -37,6 +39,7 @@ public class SFXEntry
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+    public AudioMixerGroup sfxMixerGroup;
 
     [Header("Sources")]
     public AudioSource musicSource;
@@ -96,6 +99,8 @@ void BuildPool()
 
         source.playOnAwake = false;
         source.spatialBlend = 1f;
+
+        source.outputAudioMixerGroup = sfxMixerGroup;
 
         pool.Enqueue(source);
     }
