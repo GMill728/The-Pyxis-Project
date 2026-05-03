@@ -72,14 +72,8 @@ public class StatsTracker : MonoBehaviour
         if (obj != null)
         {
             scoreManager = obj.GetComponent<ScoreManager>();
+        }
 
-            if (scoreManager == null)
-                Debug.LogError("ScoreManager component missing!");
-        }
-        else
-        {
-            Debug.LogError("GameManager object not found!");
-        }
     }
 
     private void FindPuzzleManager()
