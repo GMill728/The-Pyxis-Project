@@ -15,9 +15,11 @@ public class Pickup_Handler : MonoBehaviour
     public static event Action<int> OnScorePickup;
     public static event Action OnKeyPickup;
     public static event Action OnIntelPickup;
+    public int rotationSpeed;
     public Sprite IntelSprite;
     public Sprite HealthSprite;
     public Sprite KeySprite;
+    public Sprite ScoreSprite;
     public PickupType pickupType;
     
     [Header("Health")]
@@ -34,6 +36,11 @@ public class Pickup_Handler : MonoBehaviour
         SetColorByType();
     }
 
+    void Update()
+    {
+        transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+    }
+
     void SetColorByType()
     {
         if (rend == null) return;
@@ -41,11 +48,11 @@ public class Pickup_Handler : MonoBehaviour
         switch (pickupType)
         {
             case PickupType.Health:
-                rend.color = Color.red;
+                rend.sprite = HealthSprite;
                 break;
 
             case PickupType.Score:
-                rend.color = Color.cyan;
+                rend.sprite = ScoreSprite;
                 break;
 
             case PickupType.Key:
