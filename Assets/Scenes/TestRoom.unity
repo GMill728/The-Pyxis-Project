@@ -1749,7 +1749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d561fbb2ce43149b4661554352db5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TerminalDemo
-  sceneLoader: {fileID: 1155695994}
 --- !u!1 &780353158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,7 +3276,6 @@ MonoBehaviour:
   confirmQuitCanvas: {fileID: 0}
   crosshair: {fileID: 0}
   fpsController: {fileID: 1480419071}
-  sceneLoader: {fileID: 1155695994}
 --- !u!114 &1155695994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3684,6 +3682,63 @@ RectTransform:
   m_AnchoredPosition: {x: -45, y: -73}
   m_SizeDelta: {x: 625, y: 805}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!1001 &1331568850
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -54.88257
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000014291145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -181.24327
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920327265379307962, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875810634673490360, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
+      propertyPath: m_Name
+      value: Barracks New
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d8db81a2099e8f541ab0ef1b340c8d79, type: 3}
 --- !u!1001 &1354118080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5903,3 +5958,4 @@ SceneRoots:
   - {fileID: 94807510}
   - {fileID: 1419617978}
   - {fileID: 1033271693}
+  - {fileID: 1331568850}
