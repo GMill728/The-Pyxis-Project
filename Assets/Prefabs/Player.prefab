@@ -1630,7 +1630,7 @@ MonoBehaviour:
   minSlideSpeed: 5
   slideCooldown: 0.8
   slideDuration: 0.75
-  sensitivity: 2
+  sensitivity: 5.656854
 --- !u!143 &2334339444838361163
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2226,7 +2226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7135293645913280548
 Transform:
   m_ObjectHideFlags: 0
@@ -2275,7 +2275,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f40d1cbc408e4bf49a5e66e0cff8bd1d, type: 2}
+  - {fileID: 2100000, guid: e2e6f75eea8ae1844aeabf6be8faff22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

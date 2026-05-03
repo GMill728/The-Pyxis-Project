@@ -2,22 +2,26 @@ using UnityEngine;
 
 public class MinimapObjVisibility : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Collider room;
     public GameObject minimapRoom;
+    public GameObject floor;
+    private Renderer mapRenderer;
 
-    bool isActive = false;
-    
     void Start()
     {
-       minimapRoom.SetActive(false);
+        minimapRoom.SetActive(false);
+        mapRenderer = floor.GetComponent<Renderer>(); // fixed here
     }
         
-    // Update is called once per frame
-    void Update(){}
     void OnTriggerEnter(Collider other)
     {
         minimapRoom.SetActive(true);
+        mapRenderer.material.SetColor("_Color", Color.red);
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        minimapRoom.SetActive(true);
+        mapRenderer.material.SetColor("_Color", Color.white);
+    }
 }

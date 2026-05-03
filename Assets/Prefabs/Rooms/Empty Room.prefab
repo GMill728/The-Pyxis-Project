@@ -2371,6 +2371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MinimapObjVisibility
   room: {fileID: 6417696307358807595}
   minimapRoom: {fileID: 6081290318265751116}
+  floor: {fileID: 2774883297329176002}
 --- !u!1 &6081290318265751116
 GameObject:
   m_ObjectHideFlags: 0
