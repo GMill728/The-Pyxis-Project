@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +9,7 @@ public class StatsTracker : MonoBehaviour
     private ScoreManager scoreManager;
     private PuzzleManager puzzleManager;
 
-    private int score = 0;
+    public int score { get; private set; } = 0;
     private int stagesCleared = 0;
 
     void Awake()
@@ -17,7 +19,6 @@ public class StatsTracker : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            FindScoreManager();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -43,15 +44,25 @@ public class StatsTracker : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindScoreManager();
         FindPuzzleManager();
 
-        // player died
-        if(SceneManager.GetActiveScene().name == "GameOver")
+        if (SceneManager.GetActiveScene().name == "GameOver")
             ResetStats();
 
-        if (puzzleManager != null && stagesCleared >= 3) 
+        if (puzzleManager != null && stagesCleared >= 3)
             puzzleManager.isFinalStage = true;
+
+        StartCoroutine(InitScoreManager());
+    }
+
+    private IEnumerator InitScoreManager()
+    {
+        yield return null; // wait one frame for scene objects to initialize
+
+        FindScoreManager();
+
+        if (scoreManager != null)
+            scoreManager.SetScore(score);
     }
 
     private void FindScoreManager()
@@ -64,6 +75,10 @@ public class StatsTracker : MonoBehaviour
 
             if (scoreManager == null)
                 Debug.LogError("ScoreManager component missing!");
+        }
+        else
+        {
+            Debug.LogError("GameManager object not found!");
         }
     }
 
@@ -84,23 +99,22 @@ public class StatsTracker : MonoBehaviour
     {
         score = 0;
         stagesCleared = 0;
+
+        if (scoreManager != null)
+            scoreManager.ResetScore();
     }
 
     public void UpdateStats()
     {
-        if (scoreManager == null)
-        {
-            Debug.LogWarning("ScoreManager is null, trying to find it...");
-            FindScoreManager();
-        }
-
         if (scoreManager != null)
-        {
-            score += scoreManager.currentScore;
-            Debug.Log("Total Score: " + score);
+            score = scoreManager.currentScore;
 
-            stagesCleared++; 
-            Debug.Log("Stages Cleared: " + stagesCleared);
-        }
+        stagesCleared++;
+        Debug.Log("Stages Cleared: " + stagesCleared);
+    }
+
+    public int GetTotalScore()
+    {
+        return scoreManager != null ? scoreManager.currentScore : score;
     }
 }

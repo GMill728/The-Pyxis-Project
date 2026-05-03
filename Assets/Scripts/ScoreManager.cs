@@ -9,11 +9,6 @@ public class ScoreManager : MonoBehaviour
 
     public Action<int> OnScoreChanged;
 
-    void Awake()
-    {
-        currentScore = startingScore;
-    }
-
     private void OnEnable()
     {
         HitscanDetector.OnEnemyHit += AddEnemyScore;
@@ -23,20 +18,16 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         HitscanDetector.OnEnemyHit -= AddEnemyScore;
-        Pickup_Handler.OnScorePickup += AddItemScore;
+        Pickup_Handler.OnScorePickup -= AddItemScore;
     }
 
-    //When stage is completed, remaining time is mulitplied and added into score.
-    // OR SHOULD IT BE CALLED WHEN LEVEL IS COMPLETED??
     public void AddTimeScore(float timeLeft)
     {
         int timerScore = Mathf.RoundToInt(timeLeft) * timeMultiplier;
         currentScore += timerScore;
-        
         OnScoreChanged?.Invoke(currentScore);
     }
 
-    //When enemies take Damage/Die call this function to add enemiesValue to score
     public void AddEnemyScore(int enemyValue)
     {
         currentScore += enemyValue;
@@ -49,5 +40,15 @@ public class ScoreManager : MonoBehaviour
         OnScoreChanged?.Invoke(currentScore);
     }
 
+    public void SetScore(int value)
+    {
+        currentScore = value;
+        OnScoreChanged?.Invoke(currentScore);
+    }
 
+    public void ResetScore()
+    {
+        currentScore = startingScore;
+        OnScoreChanged?.Invoke(currentScore);
+    }
 }
