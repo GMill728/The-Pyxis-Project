@@ -578,6 +578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Intel Room
       objectReference: {fileID: 0}
+    - target: {fileID: 806268041094150343, guid: 51697e966a64c0e4890de5f47d522fb4, type: 3}
+      propertyPath: m_TagString
+      value: Intel Room
+      objectReference: {fileID: 0}
     - target: {fileID: 2445712048753320792, guid: 51697e966a64c0e4890de5f47d522fb4, type: 3}
       propertyPath: m_NavMeshData
       value: 

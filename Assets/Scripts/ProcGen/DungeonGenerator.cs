@@ -18,6 +18,7 @@ public class DungeonGenerator : MonoBehaviour
     public List<GameObject> specialRooms;
     public GameObject startRoom;
     public GameObject endRoom;
+    public GameObject intelRoom;
     public Vector2 offset;
 
     List<Cell> board;
@@ -50,9 +51,13 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         newRoom = Instantiate(startRoom, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     }
-                    else if (i == Mathf.FloorToInt(UnityEngine.Random.Range(2, size.x)) && j == Mathf.FloorToInt(UnityEngine.Random.Range(2, size.y)) && GameObject.FindGameObjectsWithTag("Airlock").Length == 0)
+                    else if (i == Mathf.FloorToInt(UnityEngine.Random.Range(1, size.x)) && j == Mathf.FloorToInt(UnityEngine.Random.Range(3, size.y)) && GameObject.FindGameObjectsWithTag("Airlock").Length == 0)
                     {
                         newRoom = Instantiate(endRoom, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
+                    }
+                    else if (i == Mathf.FloorToInt(UnityEngine.Random.Range(3, size.x)) && j == Mathf.FloorToInt(UnityEngine.Random.Range(1, size.y)) && GameObject.FindGameObjectsWithTag("Intel Room").Length == 0)
+                    {
+                        newRoom = Instantiate(intelRoom, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     }
                     else
                     {
@@ -71,7 +76,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        if (GameObject.FindGameObjectsWithTag("Airlock").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("Airlock").Length == 0 || GameObject.FindGameObjectsWithTag("Intel Room").Length == 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
