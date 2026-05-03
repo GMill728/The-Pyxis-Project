@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 8986547368535360574}
   - component: {fileID: 5111577242791940519}
   - component: {fileID: 5756549393056646810}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1290,6 +1290,9 @@ MonoBehaviour:
   _firePoint: {fileID: 7067376147480164293}
   _laser: {fileID: 9212842503068804749}
   _laserDuration: 0.05
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &4377384252935343011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,16 +1486,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8791973766288305538
-Transform:
+--- !u!224 &8791973766288305538
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6067914967891060514}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 114, y: 3, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1506,6 +1508,11 @@ Transform:
   - {fileID: 8986547368535360574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 114, y: 3}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &460435118424304021
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1615,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8986547368535360574}
   controller: {fileID: 2334339444838361163}
-  player: {fileID: 8791973766288305538}
+  player: {fileID: 0}
   acceleration: 100
   sprintAcceleration: 250
   groundFriction: 20
@@ -2388,7 +2395,7 @@ MonoBehaviour:
   debugText: {fileID: 1913413710320205971}
   debugText2: {fileID: 6409894747054688933}
   playerObject: {fileID: 6067914967891060514}
-  player: {fileID: 8791973766288305538}
+  player: {fileID: 0}
 --- !u!1 &8001099845619928346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +2406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7067376147480164293}
   - component: {fileID: 9212842503068804749}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3218,6 +3225,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 54914c37faf5aab41bad78eb96b87fd3, type: 3}
       propertyPath: m_Name
       value: PlayerModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 54914c37faf5aab41bad78eb96b87fd3, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
