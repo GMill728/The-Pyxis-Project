@@ -976,7 +976,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8353610763017069199}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -5298,7 +5298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7567550942057245511, guid: 9b05ac0743cc5234ca33229ae207d9d3, type: 3}
       propertyPath: orthographic size
-      value: 75
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7567550942057245511, guid: 9b05ac0743cc5234ca33229ae207d9d3, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -5587,14 +5587,3 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &8353610763017069199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1591957127275929765, guid: 9b05ac0743cc5234ca33229ae207d9d3, type: 3}
-  m_PrefabInstance: {fileID: 7348247487891489322}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c91001dffcdf54a84ceb07f7a5922b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
