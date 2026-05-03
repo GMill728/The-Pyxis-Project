@@ -1749,7 +1749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d561fbb2ce43149b4661554352db5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TerminalDemo
-  sceneLoader: {fileID: 1155695994}
 --- !u!1 &780353158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,7 +3276,6 @@ MonoBehaviour:
   confirmQuitCanvas: {fileID: 0}
   crosshair: {fileID: 0}
   fpsController: {fileID: 1480419071}
-  sceneLoader: {fileID: 1155695994}
 --- !u!114 &1155695994
 MonoBehaviour:
   m_ObjectHideFlags: 0
