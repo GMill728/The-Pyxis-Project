@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private PlayerHealth PlayerHealthScript;
     [SerializeField] private ScoreManager ScoreManagerScript;
 
-    [field: SerializeField] public float timeLeft { get; private set; } = 60f;
+    [field: SerializeField] public float timeLeft = 60f;
     private bool timerActive = true;
     public Action<float> OnTimerChanged;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
