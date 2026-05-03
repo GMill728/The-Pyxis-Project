@@ -1,29 +1,38 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public static class SceneLoader
 {
-    public void LoadSceneByName(string sceneName)
+    private static string previousScene;
+    public static void LoadSceneByName(string sceneName)
     {
         if(sceneName == "MainMenu")
         {
             Time.timeScale = 1.0f;
         }
+        previousScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
 
-    public void LoadSceneByIndex(int sceneIndex)
+    public static void LoadSceneByIndex(int sceneIndex)
     {
+        previousScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void LoadNextScene()
+    public static void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        previousScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
-    public void EndGame()
+    public static void LoadPreviousScene()
+    {
+        SceneManager.LoadScene(previousScene);
+    }
+
+    public static void EndGame()
     {
         Application.Quit();
 

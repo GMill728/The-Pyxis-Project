@@ -13,7 +13,6 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private string _actionMapName = "Player";
 
     [SerializeField] private Camera _camera;
-    [SerializeField] private SceneLoader _sceneLoader;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,7 +39,7 @@ public class InteractionHandler : MonoBehaviour
             {
                 onLevelComplete?.Invoke();
                 Debug.Log("Terminal Hit");
-                _sceneLoader.LoadSceneByName("Puzzle");
+                SceneLoader.LoadSceneByName("Puzzle");
             }
     }
 }

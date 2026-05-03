@@ -49,6 +49,6 @@ public class PlayerHealth : MonoBehaviour
         //reload scene for testing:
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        SceneManager.LoadScene("GameOver");
+        SceneLoader.LoadSceneByName("GameOver");
     }
 }
