@@ -10,7 +10,7 @@ public class StatsTracker : MonoBehaviour
     private PuzzleManager puzzleManager;
 
     public int score { get; private set; } = 0;
-    private int stagesCleared = 0;
+    private int stagesCleared = -1; // accounts for tutorial level
 
     void Awake()
     {
