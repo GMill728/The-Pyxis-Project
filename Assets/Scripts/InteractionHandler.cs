@@ -1,9 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InteractionHandler : MonoBehaviour
 {
+    public static event Action onLevelComplete;
+
     private InputAction _interact;
 
     [SerializeField] private InputActionAsset _actionMap;
@@ -34,6 +37,7 @@ public class InteractionHandler : MonoBehaviour
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out terminalHit, 10))
             if (terminalHit.transform.tag == "Terminal")
             {
+                onLevelComplete?.Invoke();
                 Debug.Log("Terminal Hit");
                 SceneLoader.LoadSceneByName("Puzzle");
             }
