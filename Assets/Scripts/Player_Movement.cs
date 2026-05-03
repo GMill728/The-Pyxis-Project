@@ -149,7 +149,7 @@ public class Player_Movement : MonoBehaviour
 
     void ApplyFriction()
     {
-        float friction = isGrounded ? groundFriction : 0.02f;
+        float friction = isGrounded ? groundFriction : 0.5f;
         horizontalVelocity -= horizontalVelocity * friction * Time.deltaTime;
     }
 
@@ -187,7 +187,6 @@ public class Player_Movement : MonoBehaviour
             currentSlideSpeed = Mathf.Max(slideStartSpeed, horizontalVelocity.magnitude);
 
             horizontalVelocity += slideDirection * 4f;
-            player.localScale = new Vector3(1f, 0.5f, 1f);
 
             AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
         }
@@ -209,7 +208,6 @@ public class Player_Movement : MonoBehaviour
             Input.GetKeyDown(KeyCode.LeftShift))
         {
             isSliding = false;
-            player.localScale = Vector3.one;
         }
     }
 
@@ -289,6 +287,9 @@ public class Player_Movement : MonoBehaviour
 
         transform.Rotate(Vector3.up * playerMouseInput.x * sensitivity);
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        Vector3 targetPos = isSliding ? new Vector3(0f, -0.5f, 0f) : new Vector3(0f, 1f, 0f);
+        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, Time.deltaTime * 8f);
     }
 
     public void SetSensitivity(float value)
