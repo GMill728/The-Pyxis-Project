@@ -8,6 +8,7 @@ TagManager:
   - WeakPoint
   - Terminal
   - Airlock
+  - Minimap
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - PostProcessing
-  - 
+  - Minimap
   - 
   - 
   - 
@@ -53,3 +54,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Minimap
