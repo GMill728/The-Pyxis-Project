@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class TerminalDemo : MonoBehaviour
 {
-    public SceneLoader sceneLoader;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Load Scene!");
-            sceneLoader.LoadSceneByName("Puzzle");
+            SceneLoader.LoadSceneByName("Puzzle");
             Debug.Log("Player entered the zone!");
         }
     }

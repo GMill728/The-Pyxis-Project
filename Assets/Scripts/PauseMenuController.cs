@@ -9,7 +9,6 @@ public class PauseMenuController : MonoBehaviour
     public GameObject confirmQuitCanvas;
     public GameObject crosshair;
     public Player_Movement fpsController;
-    public SceneLoader sceneLoader;
 
     private bool paused = false;
 
@@ -75,7 +74,7 @@ public class PauseMenuController : MonoBehaviour
     public void ReturnToMainMenu()
     {
         SetPauseState(true);
-        sceneLoader.LoadSceneByName("MainMenu");
+        SceneLoader.LoadSceneByName("MainMenu");
     }
 
     public void ConfirmQuit()

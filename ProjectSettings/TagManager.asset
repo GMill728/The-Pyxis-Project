@@ -8,6 +8,7 @@ TagManager:
   - WeakPoint
   - Terminal
   - Airlock
+  - Intel Room
   layers:
   - Default
   - TransparentFX
