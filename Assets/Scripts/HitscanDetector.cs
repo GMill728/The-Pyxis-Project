@@ -7,6 +7,8 @@ using System.Collections;
 public class HitscanDetector : MonoBehaviour
 {
     private InputAction _attack;
+    private InputActionMap _playerMap;
+
 
     [SerializeField] private InputActionAsset _actionMap;
     [SerializeField] private string _actionMapName = "Player";
@@ -21,13 +23,21 @@ public class HitscanDetector : MonoBehaviour
 
     public static event Action<int> OnEnemyHit;
 
+    private bool isPaused;
+
+
     void Awake()
     {
+        _playerMap = _actionMap.FindActionMap(_actionMapName);
         _attack = _actionMap.FindActionMap(_actionMapName).FindAction("Attack");
     }
 
     void Update()
     {
+        if (isPaused == true)
+        {
+            return;
+        }
         if (_attack.WasPressedThisFrame())
         {
             HandleHitscan();
@@ -95,6 +105,31 @@ public class HitscanDetector : MonoBehaviour
         _laser.enabled = false;
     }
 
-    private void OnEnable() => _attack.Enable();
-    private void OnDisable() => _attack.Disable();
+    private void OnEnable()
+    {
+        _playerMap.Enable();
+        _attack.Enable();
+        PauseMenuController.onPausedChanged += HandlePause;
+    }
+
+    private void OnDisable()
+    {
+        _playerMap.Disable();
+        _attack.Disable();
+        PauseMenuController.onPausedChanged -= HandlePause;
+
+    }
+
+    private void HandlePause(bool paused)
+    {
+        isPaused = paused;
+        if (isPaused == true)
+        {
+            _playerMap.Disable();
+        }
+        else
+        {
+            _playerMap.Enable();
+        }
+    }
 }

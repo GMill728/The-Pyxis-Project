@@ -15,7 +15,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - PostProcessing
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Main
     uniqueID: 2438494031
+    locked: 0
+  - name: Opt
+    uniqueID: 81843303
     locked: 0
   m_RenderingLayers:
   - Default

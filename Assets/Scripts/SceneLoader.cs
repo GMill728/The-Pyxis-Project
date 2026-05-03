@@ -5,6 +5,10 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadSceneByName(string sceneName)
     {
+        if(sceneName == "MainMenu")
+        {
+            Time.timeScale = 1.0f;
+        }
         SceneManager.LoadScene(sceneName);
     }
 
