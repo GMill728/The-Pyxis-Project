@@ -2476,19 +2476,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 169769879550605641, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 628759565374934223, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1378318970319786081, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1984099382548229979, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303984450889265064, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2496,11 +2496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523519925125803362, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2649127862465182443, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3237186671785965240, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_Name
@@ -2508,15 +2508,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3589272883802793224, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5174599018083480764, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5174599018083480764, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6301945311476135628, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: 'walls.Array.data[2]'
@@ -2568,11 +2568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8179803751875989626, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8204959842607838120, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
