@@ -164,6 +164,7 @@ MonoBehaviour:
   specialRooms: []
   startRoom: {fileID: 3237186671785965240, guid: bd3be5c844cb60e4fb95132c90f448ee, type: 3}
   endRoom: {fileID: 1507167460160516670, guid: 47024a5902dee5f448f895d38e14542a, type: 3}
+  intelRoom: {fileID: 8825956479256474446, guid: 373cf00c1cfe6ad4c9a11cc56e3fb40b, type: 3}
   offset: {x: 30, y: 30}
 --- !u!4 &1410294450
 Transform:

@@ -1231,7 +1231,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6739630546121505434}
-  - component: {fileID: 1591957127275929765}
   - component: {fileID: 9140456441113164959}
   - component: {fileID: 5899808378626010407}
   m_Layer: 0
@@ -1256,18 +1255,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8791973766288305538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1591957127275929765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329117935913031072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c91001dffcdf54a84ceb07f7a5922b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
 --- !u!114 &9140456441113164959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,7 +1272,6 @@ MonoBehaviour:
   confirmQuitCanvas: {fileID: 0}
   crosshair: {fileID: 7518928982352873151}
   fpsController: {fileID: 3780122049378284467}
-  sceneLoader: {fileID: 1591957127275929765}
 --- !u!114 &5899808378626010407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,7 +1601,6 @@ MonoBehaviour:
   _actionMap: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _actionMapName: Player
   _camera: {fileID: 5111577242791940519}
-  _sceneLoader: {fileID: 1591957127275929765}
 --- !u!114 &3780122049378284467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3044,10 +3029,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1591957127275929765}
     - target: {fileID: 5662789350912331305, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
