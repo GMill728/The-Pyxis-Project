@@ -12,7 +12,7 @@ public class Player_Movement : MonoBehaviour
 
     private bool isGrounded;
     private bool isPaused;
-    
+    private bool isAirDashing;
 
     [Header("Components")]
     [SerializeField] private Transform playerCamera;
@@ -23,7 +23,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float acceleration = 40f;
     [SerializeField] private float sprintAcceleration = 60f;
     [SerializeField] private float groundFriction = 8f;
-    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float absoluteMaxSpeed = 100f;
 
     [Header("Jump")]
@@ -57,6 +57,7 @@ public class Player_Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
     }
+
     public void SetPause(bool paused)
     {
         isPaused = paused;
@@ -76,9 +77,7 @@ public class Player_Movement : MonoBehaviour
     void Update()
     {
         if (isPaused == true)
-        {
             return;
-        }
 
         sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
         playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
@@ -92,10 +91,9 @@ public class Player_Movement : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(isPaused == true)
-        {
+        if (isPaused == true)
             return;
-        }
+
         if (Mathf.Abs(hit.normal.y) < 0.2f && !isGrounded)
             HandleWallBounce(hit);
     }
@@ -105,11 +103,11 @@ public class Player_Movement : MonoBehaviour
         Vector3 inputDirection = GetInputDirection();
 
         HandleGroundReset();
+        HandleAirDash();
         HandleAcceleration(inputDirection);
         ApplyFriction();
 
         HandleJump();
-        HandleAirDash();
         HandleAirStrafe();
         HandleFastFall();
         HandleSlide();
@@ -132,6 +130,7 @@ public class Player_Movement : MonoBehaviour
             verticalVelocity = -2f;
             canBoost = true;
             isFastFalling = false;
+            isAirDashing = false;
         }
     }
 
@@ -142,7 +141,7 @@ public class Player_Movement : MonoBehaviour
         float accel = Input.GetKey(KeyCode.LeftShift) ? sprintAcceleration : acceleration;
         horizontalVelocity += inputDirection * accel * Time.deltaTime;
 
-        if(!isGrounded)
+        if (!isGrounded && !isAirDashing)
             horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed / 3);
         else
             horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeed);
@@ -150,7 +149,7 @@ public class Player_Movement : MonoBehaviour
 
     void ApplyFriction()
     {
-        float friction = isGrounded ? groundFriction : 0.02f;
+        float friction = isGrounded ? groundFriction : 0.5f;
         horizontalVelocity -= horizontalVelocity * friction * Time.deltaTime;
     }
 
@@ -162,14 +161,13 @@ public class Player_Movement : MonoBehaviour
             canBoost = true;
         else if (!canBoost)
             return;
-        else // double jump
+        else
         {
             AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
             canBoost = false;
         }
         verticalVelocity = jumpForce;
         horizontalVelocity *= 1.01f;
-
     }
 
     void HandleSlide()
@@ -183,22 +181,19 @@ public class Player_Movement : MonoBehaviour
         {
             isSliding = true;
             slideTimer = slideDuration;
-
             slideCooldownTimer = slideCooldown;
 
             slideDirection = transform.TransformDirection(playerMovementInput.normalized);
             currentSlideSpeed = Mathf.Max(slideStartSpeed, horizontalVelocity.magnitude);
 
             horizontalVelocity += slideDirection * 4f;
-            player.localScale = new Vector3(1f, 0.5f, 1f);
-            
+
             AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
         }
 
         if (!isSliding || !isGrounded) return;
 
         slideTimer -= Time.deltaTime;
-
         currentSlideSpeed -= slideFriction * Time.deltaTime;
 
         horizontalVelocity = Vector3.Lerp(
@@ -207,14 +202,12 @@ public class Player_Movement : MonoBehaviour
             10f * Time.deltaTime
         );
 
-        // slide cancel
         if (currentSlideSpeed <= minSlideSpeed ||
             slideTimer <= 0f ||
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.LeftShift))
         {
             isSliding = false;
-            player.localScale = Vector3.one;
         }
     }
 
@@ -231,9 +224,9 @@ public class Player_Movement : MonoBehaviour
 
         horizontalVelocity += boostDir.normalized * boostForce;
         canBoost = false;
+        isAirDashing = true;
 
         AudioManager.Instance.PlaySFX(SFXType.PlayerBoosters);
-
     }
 
     void HandleAirStrafe()
@@ -283,7 +276,7 @@ public class Player_Movement : MonoBehaviour
 
     void HandleWallBounce(ControllerColliderHit hit)
     {
-        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 0.5f; //was originally .9f
+        horizontalVelocity = Vector3.Reflect(horizontalVelocity, hit.normal) * 0.5f;
         canBoost = true;
     }
 
@@ -294,7 +287,11 @@ public class Player_Movement : MonoBehaviour
 
         transform.Rotate(Vector3.up * playerMouseInput.x * sensitivity);
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        Vector3 targetPos = isSliding ? new Vector3(0f, -0.5f, 0f) : new Vector3(0f, 1f, 0f);
+        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, Time.deltaTime * 8f);
     }
+
     public void SetSensitivity(float value)
     {
         value = Mathf.Clamp(value, 0.5f, 15f);
