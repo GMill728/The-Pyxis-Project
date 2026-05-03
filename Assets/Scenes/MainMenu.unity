@@ -1221,7 +1221,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1f0b80282e919314cbf93abb765ef538, type: 3}
   sfxEntries:
   - type: 0
-    clip: {fileID: 8300000, guid: 9bd757abc64bf1b4ebf161cc26665c93, type: 3}
+    clip: {fileID: 8300000, guid: 43b725bac0241d54fac33641629d036a, type: 3}
   - type: 1
     clip: {fileID: 8300000, guid: 237487fb773d7d14881341db4201b8b9, type: 3}
   - type: 3
