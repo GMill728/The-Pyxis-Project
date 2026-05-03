@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class PauseMenuController : MonoBehaviour
 {
-    public GameObject menuButton;
+    public static event Action<bool> onPausedChanged;
+    public GameObject PauseMenu;
+    public CanvasGroup PauseMenuGroup;
+    public GameObject confirmQuitCanvas;
     public GameObject crosshair;
     public Player_Movement fpsController;
     public SceneLoader sceneLoader;
@@ -12,24 +16,49 @@ public class PauseMenuController : MonoBehaviour
     void Start()
     {
         fpsController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Movement>();
-        fpsController.enabled = true;
-        Time.timeScale = 1f;
-        menuButton.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        confirmQuitCanvas.SetActive(false);
+        SetPauseState(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            TogglePause();
+        {
+            AudioManager.Instance.PlaySFX(SFXType.ButtonClick2);
+            SetPauseState(!paused);
+        }
+    }
+    public void SetPauseState(bool value)
+    {
+
+        paused = value;
+
+        PauseMenu.SetActive(paused);
+        crosshair.SetActive(!paused);
+        fpsController.SetPause(paused);
+
+        Time.timeScale = paused ? 0f : 1f;
+
+
+        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = paused;
+        if (!paused)
+        {
+            Input.ResetInputAxes();
+        }
+
+        onPausedChanged?.Invoke(paused);
+
+
     }
 
-    public void TogglePause()
+    /*public void TogglePause()
     {
+        SetPauseState(!paused);
+        /*
         paused = !paused;
 
-        menuButton.SetActive(paused);
+        pauseCanvas.SetActive(paused);
         crosshair.SetActive(!paused);
         fpsController.enabled = !paused;
 
@@ -39,13 +68,28 @@ public class PauseMenuController : MonoBehaviour
 
         Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = paused;
+
+        onPausedChanged?.Invoke(paused);
+        
+    }*/
+    public void ReturnToMainMenu()
+    {
+        SetPauseState(true);
+        sceneLoader.LoadSceneByName("MainMenu");
     }
 
-        public void ReturnToMainMenu()
+    public void ConfirmQuit()
     {
-        sceneLoader.LoadSceneByName("MainMenu");
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        PauseMenuGroup.alpha = 1.0f;
+        PauseMenuGroup.interactable = false;
+        PauseMenuGroup.blocksRaycasts = false;
+        confirmQuitCanvas.SetActive(true);
+    }
+
+    public void NoQuit()
+    {
+        confirmQuitCanvas.SetActive(false);
+        PauseMenuGroup.interactable = true;
+        PauseMenuGroup.blocksRaycasts = true;
     }
 }

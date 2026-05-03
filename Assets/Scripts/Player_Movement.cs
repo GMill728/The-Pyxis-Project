@@ -11,6 +11,8 @@ public class Player_Movement : MonoBehaviour
     private float xRotation;
 
     private bool isGrounded;
+    private bool isPaused;
+    
 
     [Header("Components")]
     [SerializeField] private Transform playerCamera;
@@ -53,12 +55,34 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
+    }
+    public void SetPause(bool paused)
+    {
+        isPaused = paused;
+
+        if (paused == true)
+        {
+            playerMovementInput = Vector3.zero;
+            playerMouseInput = Vector2.zero;
+
+            horizontalVelocity = Vector3.zero;
+            verticalVelocity = 0f;
+            isSliding = false;
+            isFastFalling = false;
+        }
     }
 
     void Update()
     {
+        if (isPaused == true)
+        {
+            return;
+        }
+
+        sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 2f);
         playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        playerMouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         isGrounded = controller.isGrounded;
 
@@ -68,6 +92,10 @@ public class Player_Movement : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if(isPaused == true)
+        {
+            return;
+        }
         if (Mathf.Abs(hit.normal.y) < 0.2f && !isGrounded)
             HandleWallBounce(hit);
     }
@@ -266,5 +294,10 @@ public class Player_Movement : MonoBehaviour
 
         transform.Rotate(Vector3.up * playerMouseInput.x * sensitivity);
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+    public void SetSensitivity(float value)
+    {
+        value = Mathf.Clamp(value, 0.5f, 15f);
+        sensitivity = Mathf.Pow(value, 1.5f) * 2.0f;
     }
 }
