@@ -50,6 +50,10 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         newRoom = Instantiate(startRoom, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     }
+                    else if (i == Mathf.FloorToInt(UnityEngine.Random.Range(2, size.x)) && j == Mathf.FloorToInt(UnityEngine.Random.Range(2, size.y)) && GameObject.FindGameObjectsWithTag("Airlock").Length == 0)
+                    {
+                        newRoom = Instantiate(endRoom, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
+                    }
                     else
                     {
                         newRoom = Instantiate(roomTypes[Mathf.FloorToInt(UnityEngine.Random.Range(0, roomTypes.Count))], new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
