@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup_Handler
   rotationSpeed: 75
-  IntelSprite: {fileID: 21300000, guid: 518725dae88b07845b7f864aa573abe3, type: 3}
+  IntelSprite: {fileID: 21300000, guid: b5e349f11f8147845950bd732e7cac23, type: 3}
   HealthSprite: {fileID: 21300000, guid: e7b0fc1afb15d874993e4ae2b82c97af, type: 3}
   KeySprite: {fileID: 21300000, guid: deda7e790f8cfbc48a038591715a68e3, type: 3}
   ScoreSprite: {fileID: 21300000, guid: 9c4d60afb3e9d084d8712d8680474002, type: 3}
