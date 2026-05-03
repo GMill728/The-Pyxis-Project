@@ -1696,6 +1696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 555948216}
+  - component: {fileID: 555948217}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -1718,6 +1719,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &555948217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555948215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c91001dffcdf54a84ceb07f7a5922b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
 --- !u!1 &563421338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,7 +2026,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 555948217}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -3681,7 +3694,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 555948217}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: EndGame
         m_Mode: 1
@@ -7349,7 +7362,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 555948217}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -7780,7 +7793,7 @@ PrefabInstance:
     - target: {fileID: 5220057680511920279, guid: 49e1947483dec3d4381645e6345d340c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 555948217}
     - target: {fileID: 9050581273812388053, guid: 49e1947483dec3d4381645e6345d340c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7917,7 +7930,7 @@ PrefabInstance:
     - target: {fileID: 2940366361195471207, guid: 00b41008fb37def4e85d5c5ba0a02013, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 555948217}
     - target: {fileID: 2940366361195471207, guid: 00b41008fb37def4e85d5c5ba0a02013, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1

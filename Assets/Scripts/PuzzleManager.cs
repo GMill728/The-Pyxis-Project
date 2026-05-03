@@ -23,7 +23,6 @@ public class PuzzleManager : MonoBehaviour
     public int solveNumber;
     public bool isSolved = false;
     public bool isFinalStage = false;
-    private bool isLoading = false;
 
     void Start()
     {
@@ -38,14 +37,11 @@ public class PuzzleManager : MonoBehaviour
 
     void Update()
     {
-        if (isSolved && !isLoading)
-        {
-            isLoading = true;
-
-            if (isFinalStage)
-                LoadingScreen.Instance.LoadScene("MainMenu");
+        if (isSolved){
+            if(isFinalStage)
+                SceneManager.LoadScene("MainMenu");
             else
-                LoadingScreen.Instance.LoadScene("ProcGen Test", 3f);
+                SceneManager.LoadScene("ProcGen Test");
         }
     }
 

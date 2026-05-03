@@ -77,7 +77,7 @@ public class HitscanDetector : MonoBehaviour
 
             if (hitObject.CompareTag("WeakPoint"))
             {
-                hitObject.transform.parent.gameObject.GetComponent<EnemyDeath>().PlayDeath();
+                Destroy(hitObject.transform.parent.gameObject);
                 OnEnemyHit?.Invoke(200);
                 AudioManager.Instance.PlaySFXAtPosition(SFXType.EnemyKill, objectHit.point);
             }

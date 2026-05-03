@@ -1018,10 +1018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barracks New
       objectReference: {fileID: 0}
-    - target: {fileID: 2445712048753320792, guid: 51697e966a64c0e4890de5f47d522fb4, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 46ad9cad94aebd8428622f2dfba57945, type: 2}
     - target: {fileID: 8997259642269196485, guid: 51697e966a64c0e4890de5f47d522fb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

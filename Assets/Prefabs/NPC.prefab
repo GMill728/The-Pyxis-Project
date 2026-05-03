@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -2864260833104616219}
   - component: {fileID: 5124705666579162706}
   - component: {fileID: 597298737043896056}
-  - component: {fileID: -2574992173074514768}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Enemy
@@ -191,15 +190,3 @@ MonoBehaviour:
   goals: []
   detectionRange: 30
   stoppingDistance: 5
---- !u!114 &-2574992173074514768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537859633598632226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e24991a83c1c7e46b7146c5b0232079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
