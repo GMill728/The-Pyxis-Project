@@ -1280,7 +1280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4108acb489d0d9b4180a37f8cbdd32dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuController
-  menuButton: {fileID: 6344339452955739714}
+  PauseMenu: {fileID: 0}
+  PauseMenuGroup: {fileID: 0}
+  confirmQuitCanvas: {fileID: 0}
   crosshair: {fileID: 7518928982352873151}
   fpsController: {fileID: 3780122049378284467}
   sceneLoader: {fileID: 1591957127275929765}
@@ -2716,8 +2718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -61, y: -4.0000796}
-  m_SizeDelta: {x: 152, y: 118}
+  m_AnchoredPosition: {x: -53.558594, y: 0}
+  m_SizeDelta: {x: 186.23328, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1460822826247182251
 CanvasRenderer:
@@ -2747,7 +2749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1218364409, guid: 096d1bb35df3cec4fa2034e808ce9042, type: 3}
+  m_Sprite: {fileID: -2072978262, guid: 8a8f98984959bd343aa478b80b3b0104, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3167,11 +3169,6 @@ PrefabInstance:
 --- !u!224 &3488179485237316052 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9198749922575595850, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
-  m_PrefabInstance: {fileID: 5746600357025624222}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6344339452955739714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1714632916451555036, guid: ba7ce2081fca33e4da3953f64b9d8ed7, type: 3}
   m_PrefabInstance: {fileID: 5746600357025624222}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6157375401148353097
