@@ -48,8 +48,10 @@ public class StatsTracker : MonoBehaviour
         FindPuzzleManager();
 
         if (SceneManager.GetActiveScene().name == "GameOver")
+        {
             GameObject.FindGameObjectWithTag("Score Display").GetComponent<TextMeshProUGUI>().text = "Score: " + score;
             ResetStats();
+        }
 
         if (puzzleManager != null && stagesCleared >= 3)
             puzzleManager.isFinalStage = true;
