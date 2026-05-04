@@ -1290,6 +1290,9 @@ MonoBehaviour:
   _firePoint: {fileID: 7067376147480164293}
   _laser: {fileID: 9212842503068804749}
   _laserDuration: 0.05
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4377384252935343011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,7 +2361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
   PlayerHealthScript: {fileID: 7759258585291872191}
   ScoreManagerScript: {fileID: 5055821611550955728}
-  <timeLeft>k__BackingField: 60
+  timeLeft: 60
 --- !u!114 &5055821611550955728
 MonoBehaviour:
   m_ObjectHideFlags: 0

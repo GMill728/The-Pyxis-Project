@@ -21,6 +21,7 @@ public class HitscanDetector : MonoBehaviour
     [SerializeField] private LineRenderer _laser;
     [SerializeField] private float _laserDuration = 0.05f;
 
+    [SerializeField] private LayerMask _playerMask;
     public static event Action<int> OnEnemyHit;
 
     private bool isPaused;
@@ -59,7 +60,7 @@ public class HitscanDetector : MonoBehaviour
         // Ray from camera to determine exact aim point
         Ray camRay = new Ray(_camera.transform.position, _camera.transform.forward);
 
-        if (Physics.Raycast(camRay, out RaycastHit camHit, 2000f))
+        if (Physics.Raycast(camRay, out RaycastHit camHit, 2000f, ~_playerMask))
         {
             // Adjust direction so bullet goes from firepoint to where camera is aiming
             direction = (camHit.point - start).normalized;
@@ -68,7 +69,7 @@ public class HitscanDetector : MonoBehaviour
         Vector3 end = start + direction * 2000f;
 
         // Actual shot from firepoint
-        if (Physics.Raycast(start, direction, out objectHit, 2000f))
+        if (Physics.Raycast(start, direction, out objectHit, 2000f, ~_playerMask))
         {
             end = objectHit.point;
 
