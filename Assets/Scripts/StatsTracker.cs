@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,6 +48,7 @@ public class StatsTracker : MonoBehaviour
         FindPuzzleManager();
 
         if (SceneManager.GetActiveScene().name == "GameOver")
+            GameObject.FindGameObjectWithTag("Score Display").GetComponent<TextMeshProUGUI>().text = "Score: " + score;
             ResetStats();
 
         if (puzzleManager != null && stagesCleared >= 3)
