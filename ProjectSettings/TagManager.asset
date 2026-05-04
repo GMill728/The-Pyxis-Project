@@ -10,6 +10,7 @@ TagManager:
   - Airlock
   - Intel Room
   - minimap
+  - Score Display
   layers:
   - Default
   - TransparentFX
