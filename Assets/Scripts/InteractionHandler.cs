@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.SceneManagement;
 
 public class InteractionHandler : MonoBehaviour
 {
@@ -14,13 +15,36 @@ public class InteractionHandler : MonoBehaviour
 
     [SerializeField] private Camera _camera;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool hasIntel = false;
+    private bool hasKey = false;
+
+    void OnEnable()
+    {
+        Pickup_Handler.OnIntelPickup += OnIntelPickup;
+        Pickup_Handler.OnKeyPickup += OnKeyPickup;
+    }
+
+    void OnDisable()
+    {
+        Pickup_Handler.OnIntelPickup -= OnIntelPickup;
+        Pickup_Handler.OnKeyPickup -= OnKeyPickup;
+    }
+
+    private void OnIntelPickup()
+    {
+        hasIntel = true;
+    }
+
+    private void OnKeyPickup()
+    {
+        hasKey = true;
+    }
+
     void Start()
     {
         _interact = _actionMap.FindActionMap(_actionMapName).FindAction("Attack");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_interact.WasPressedThisFrame())
@@ -37,9 +61,17 @@ public class InteractionHandler : MonoBehaviour
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out terminalHit, 10))
             if (terminalHit.transform.tag == "Terminal")
             {
+                if(!hasIntel) return;
                 onLevelComplete?.Invoke();
                 Debug.Log("Terminal Hit");
-                SceneLoader.LoadSceneByName("Puzzle");
+                if (hasKey)
+                {
+                    SceneLoader.LoadSceneByName(SceneManager.GetActiveScene().name);
+                }
+                else
+                {
+                    SceneLoader.LoadSceneByName("Puzzle");
+                }
             }
     }
 }
