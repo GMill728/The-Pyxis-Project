@@ -17,6 +17,7 @@ public class LoadingScreen : MonoBehaviour
         image.enabled = false;
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     public void LoadScene(string sceneName, float delay = 0f)
@@ -28,7 +29,7 @@ public class LoadingScreen : MonoBehaviour
     {
         image.enabled = true;
         animator.enabled = true;
-        animator.Play(0, -1, 0f);
+        // animator.Play(0, -1, 0f);
 
         AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
         load.allowSceneActivation = false;
