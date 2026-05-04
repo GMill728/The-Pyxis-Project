@@ -66,7 +66,7 @@ public class InteractionHandler : MonoBehaviour
                 Debug.Log("Terminal Hit");
                 if (hasKey)
                 {
-                    SceneLoader.LoadSceneByName(SceneManager.GetActiveScene().name);
+                    SceneLoader.LoadSceneByName("ProcGen Test");
                 }
                 else
                 {
