@@ -14,28 +14,13 @@ public class InteractionHandler : MonoBehaviour
 
     [SerializeField] private Camera _camera;
 
-    private bool hasIntel = false;
-
-    void OnEnable()
-    {
-        Pickup_Handler.OnIntelPickup += OnIntelPickup;
-    }
-
-    void OnDisable()
-    {
-        Pickup_Handler.OnIntelPickup -= OnIntelPickup;
-    }
-
-    private void OnIntelPickup()
-    {
-        hasIntel = true;
-    }
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _interact = _actionMap.FindActionMap(_actionMapName).FindAction("Attack");
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (_interact.WasPressedThisFrame())
@@ -52,7 +37,6 @@ public class InteractionHandler : MonoBehaviour
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out terminalHit, 10))
             if (terminalHit.transform.tag == "Terminal")
             {
-                if(!hasIntel) return;
                 onLevelComplete?.Invoke();
                 Debug.Log("Terminal Hit");
                 SceneLoader.LoadSceneByName("Puzzle");
