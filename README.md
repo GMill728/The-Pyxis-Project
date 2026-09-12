@@ -1,8 +1,6 @@
 # The-Pyxis-Project
 
-  <div align="center">
-      <img width="400" height="200" alt="working-pyxis0 3" src="https://github.com/user-attachments/assets/c36bfe49-99b7-4042-aafa-50eacfa52221" />
-  </div>
+
 
 ## Description
 A procedurally generated retro movement shooter made collaboratevly for a capstone class at the Kutztown University of Pennsylvania. Early Access released on May 4, 2026.
@@ -18,3 +16,8 @@ By the late 23rd century only a few factions remain:
 
 You are Pyxis, A new generation of AI and cybernetics sent to defend The Anchor.  The 0Pz plan to turn it into a black hole bomb capable of destroying the entire galaxy. With all factions converging on T Pyxidis and the original scientists dead, you must eliminate all threats and collect ship's logs for relay to the FRS station.  Remember, you are expendable, The Anchor is not.
 
+## Photos
+<div align="center">
+<img width="75%" height="auto" alt="image-with-gif(1)" src="https://github.com/user-attachments/assets/da22897a-6f88-4442-893d-934785c9f8a2" />
+
+</div>
