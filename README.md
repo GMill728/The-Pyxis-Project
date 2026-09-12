@@ -40,6 +40,9 @@ You are Pyxis, A new generation of AI and cybernetics sent to defend The Anchor.
 <div align="center">
   
 <img width="800" height="450" alt="pyxRend2" src="https://github.com/user-attachments/assets/1e81befb-bd19-4d19-a96b-5da03a1026f4" />
+<img width="800" height="450" alt="shoot1" src="https://github.com/user-attachments/assets/3c9d2122-613d-41a4-bd10-5f65fb7a116b" />
+<img width="800" height="450" alt="puzzle" src="https://github.com/user-attachments/assets/3f27d3eb-7941-455f-a043-b1acbb7fa179" />
+
 
 </div>
 
